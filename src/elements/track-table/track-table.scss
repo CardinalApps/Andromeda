@@ -1,0 +1,129 @@
+//
+// <track-table>
+//
+track-table {
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+
+  [data-col="track_num"] {
+    width: 15px;
+  }
+
+  [data-col="source"] {
+    width: 100px;
+  }
+
+  [data-col="artist_name"],
+  [data-col="release_title"] {
+    //width: 20%;
+  }
+
+  [data-col="durationformatted"] {
+    width: 110px;
+  }
+
+  table {
+    width: 100%;
+    position: relative;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+  }
+
+  table thead {
+
+    tr {
+      th:first-of-type {
+        border-top-left-radius: var(--border-radius-small);
+      }
+
+      th:last-of-type {
+        border-top-right-radius: var(--border-radius-small);
+      }
+    }
+
+    th[data-col="source"], 
+    th[data-col="durationformatted"] {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    th {
+      max-width: 0;
+      padding: 8px 15px;
+      font: 600 13px var(--base-font);
+      color: var(--color-cream);
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background-color: var(--base-darker-2);
+
+      &:not(.noclick):active {
+        background-color: var(--base-lighter-1);
+      }
+
+      &.asc,
+      &.desc {
+        span {
+          margin-right: 7px;
+        }
+      }
+
+      &.asc:after {
+        @include icon('\f0d8');
+        color: var(--accent-color);
+      }
+
+      &.desc:after {
+        @include icon('\f0d7');
+        color: var(--accent-color);
+      }
+
+      span {
+        pointer-events: none;
+      }
+    }
+  }
+
+  table tbody {
+
+    td {
+      max-width: 0;
+      padding: 8px 15px;
+      font: 13px var(--base-font);
+      color: var(--color-cream);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      i {
+        font-size: 14px;
+        color: var(--color-cream);
+      }
+    }
+
+    td[data-col="source"],
+    td[data-col="durationformatted"] {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    // zebra
+    tr:nth-of-type(even) {
+      td {
+        background-color: var(--base-darker-1);
+      }
+    }
+
+    tr:hover {
+      
+      td {
+        background: var(--base-lighter-1)
+      }
+    }
+  }
+}

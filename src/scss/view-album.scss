@@ -1,0 +1,125 @@
+h1 {
+
+  span {
+    opacity: 0.3;
+    font-size: 24px;
+  }
+}
+
+#single-album-layout {
+  padding-top: var(--focus-space);
+  
+  .this-album {
+    margin-bottom: 50px;
+
+    .cols {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .art-col {
+      width: 380px;
+      position: relative;
+      padding: 0 40px 0 0;
+
+      .elevator {
+        position: sticky;
+        top: 0;
+      }
+
+      .art {
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+        text-align: center;
+
+        .art-box {
+          position: relative;
+          @include pop();
+        }
+
+        img {
+          width: 100%;
+          margin-bottom: 0;
+          display: block;
+          border-radius: var(--border-radius-small);
+        }
+
+        .no-art {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .by {
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--color-cream);
+      
+      a {
+        color: var(--color-cream);
+      }
+    }
+
+    artist-block {
+      margin-bottom: 20px;
+    }
+
+    .tracks-col {
+      width: calc(100% - 380px);
+
+      track-table {
+        width: 100%;
+      }
+
+      track-block:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+
+  #single-album-layout {
+
+    .this-album {
+
+      .art-col {
+        width: 100%;
+        max-width: none;
+        padding-right: 0;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        .elevator {
+          width: 100%;
+          max-width: 340px;
+          position: static;
+        }
+
+        .no-art {
+          max-width: 600px;
+          max-height: 600px;
+          margin: 0 auto 20px;
+          display: block;
+        }
+
+        .art-box {
+          width: 380px;
+          margin: 0 auto;
+        }
+
+        .artist-meta {
+          justify-content: center;
+        }
+      }
+
+      .tracks-col {
+        width: 100%;
+      }
+    }
+  }
+
+}

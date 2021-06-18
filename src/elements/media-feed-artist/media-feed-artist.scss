@@ -1,0 +1,22 @@
+media-feed-artist {
+  padding: 50px 45px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+
+  .gradient-bg {
+    z-index: -1;
+  }
+
+  .artist-name {
+    width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cols {
+    width: 100%;
+    display: flex;
+  }
+}

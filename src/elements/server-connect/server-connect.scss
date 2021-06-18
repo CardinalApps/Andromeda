@@ -1,0 +1,100 @@
+server-connect[overlay] {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  background-color: var(--base-color);
+  z-index: 100;
+  --form-width: 260px;
+  --help-width: 500px;
+  --bird-height: 76px;
+
+  .row {
+    width: 100%;
+  }
+
+  .grab {
+    width: auto;
+    right: 125px;
+  }
+
+  form#create-server-connection {
+    width: var(--form-width);
+    margin: calc(-1 * var(--bird-height)) auto 0; // positive to negative conversion
+
+    .message {
+      width: 100%;
+      padding: 16px 8px 16px 40px;
+      margin-bottom: 20px;
+      font: 14px var(--base-font);
+      display: flex;
+      align-items: center;
+      display: none;
+      position: relative;
+      border-radius: var(--border-radius-small);
+      background-color: var(--base-lighter-1);
+
+      &.error-message {
+        background-color: var(--danger-bg);
+      }
+
+      &.warning-message {
+        background-color: var(--warning-bg);
+      }
+
+      i {
+        position: absolute;
+        margin-top: -8px;
+        margin-right: 10px;
+        top: 50%;
+        left: 13px;
+        font-size: 16px;
+      }
+
+      span {
+        font: 13px var(--base-font);
+      }
+    }
+
+    .form-title {
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .bird {
+      height: var(--bird-height);
+    }
+  }
+
+  .connection-help {
+    width: var(--help-width);
+    margin: 20px auto 0;
+
+    button {
+      margin-left: calc((var(--help-width) - var(--form-width))/2);
+      font: 13px var(--base-font);
+      
+      span[tabindex="-1"] {
+        color: var(--color-faded);
+      }
+    }
+  }
+}

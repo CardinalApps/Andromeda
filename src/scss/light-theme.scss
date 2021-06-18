@@ -1,0 +1,276 @@
+/**
+ * Light mode vars.
+ *
+ * All color names were chosen when making the dark theme, and they aren't totally
+ * accurate in the light theme because the light theme's base is so light. Oops.
+ */
+ music-app[color-theme="light"] {
+  --base-color: #e6e6e6;
+
+  // shades darker and lighter, used for background and borders
+  --base-darker-1: #ececec;
+  --base-darker-2: #d5d5d5;
+  --base-darker-3: #d8d8d8;
+  --base-lighter-1: #e0e0e0;
+  --base-lighter-2: #d7d7d7;
+  --base-lighter-3: #cdcdcd;
+
+  // text colors
+  --color-slab: #ffffff; // base color, completley saturated
+  --color-blend: #c7c7c7; // text is very subtle on base color
+  --color-faded: #afafaf; // a little less subtle
+  --color-cream: #6e6e6e; // somewhere in between, good readability
+  --color-egg: #6b6b6b; // brighter...
+  --color-opposite: #1e1e1e; // contrasts with base for striking readibility
+  --color-extreme: #000000; // extreme contrast (100% black or white)
+
+  // status indicators
+  --success: #3b9c39; // text/borders
+  --warning: yellow; // text/borders
+  --danger: #d24848; // text/borders
+  --success-bg: #2f5a2f; // backgrounds
+  --warning-bg: #efbe34; // backgrounds
+  --danger-bg: #bb5555; // backgrounds
+
+  // shadows and borders
+  --defining-border: 1px solid #d4d4d4;
+  --box-shadow: 0 2px 2px 1px #9a9a9a;
+  --box-shadow-large: 0 0 6px 2px rgba(0,0,0, 0.3);
+
+  // gradients
+  --gradient: linear-gradient(45deg, var(--color-faded) 0%, var(--base-darker-1) 100%);
+  --gradient-2: linear-gradient(45deg, var(--base-darker-3) 0%, var(--base-lighter-1) 110%);
+  --gradient-accent: linear-gradient(45deg, var(--base-darker-2) 10%, var(--accent-color) 2300%);
+  --part-transparent-gradient: linear-gradient(0deg, rgba(0,0,0, 0.55) 17%, rgba(0,0,0, 0.2));
+  
+  // other
+  --empty-message-color: rgba(90, 90, 90, 0.8);
+  --scrollbar-color: #9c9c9c;
+}
+
+/**
+ *  Overrides for children in the light theme.
+ */
+music-app[color-theme="light"] {
+
+  /**
+   * general
+   */
+   h3 {
+     color: var(--color-opposide);
+   }
+
+   main#view header .breadcrumbs {
+     color: var(--color-egg);
+   }
+
+  /**
+   * nav pillar
+   */
+  #nav-pillar .menus li a.active { background: var(--color-blend); }
+  #nav-pillar .menus .nav-title { color: var(--color-cream); }
+
+  /**
+   * buttons
+   */
+  button.circle-button i { color: var(--color-slab); }
+
+  /**
+   * play-button
+   */
+  play-button {
+
+    .playing-animation .bar {
+      background-color: var(--accent-color);
+    }
+  }
+
+  /**
+   * tabs
+   */
+   header.tabs-row .flex-tab { background-color: var(--base-lighter-1); }
+   header.tabs-row .flex-tab.active { background-color: var(--color-blend); }
+
+  /**
+   * forms
+   */
+  form {
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    textarea {
+      color: var(--color-opposite);
+      background-color: var(--color-blend);
+
+      &::-webkit-input-placeholder {
+        color: var(--color-cream);
+      }
+    }
+
+    button[type="reset"],
+    button[type="submit"] {
+      background-color: var(--color-blend);
+    }
+
+    .toggle-switch .switch { background: var(--color-egg); }
+    .form-group .instructions p { color: var(--color-opposite); }
+  }
+
+  /**
+   * context-menu
+   */
+  context-menu .group-name { color: var(--color-opposite); }
+  context-menu .context-menu-item:hover:not([data-hover])  { background-color: var(--color-blend); }
+  context-menu .context-menu-item i { color: var(--color-opposite); }
+  context-menu .context-menu-item:hover[data-hover="danger"] span { color: var(--color-slab); }
+  
+  /**
+   * dot-menu
+   */
+  dot-menu {
+
+    i { color: var(--color-opposite); }
+
+    &.slim {
+      i { color: var(--accent-color); }
+    }
+  }
+
+  /**
+   * playback-controls
+   */
+  playback-controls button.-pause i,
+  playback-controls button.-play i,
+  playback-controls button.-previous i,
+  playback-controls button.-next i {
+    color: var(--color-opposite);
+  }
+
+  playback-controls .time .duration {
+    color: var(--color-egg);
+  }
+
+  /**
+   * playlist-block
+   */
+   playlist-block {
+    
+    .inner:hover,
+    &.interacting .inner {
+      background: var(--color-blend);
+    }
+  }
+
+  /**
+   * track-block
+   */
+  track-block {
+
+    .meta span,
+    .duration {
+      color: var(--color-opposite);
+    }
+  }
+
+  track-block[mode="expanded"] {
+    background-color: var(--base-darker-3);
+    
+    &:hover {
+      background-color: var(--color-blend);
+    }
+
+    .playing-animation .bar {
+      background-color: var(--accent-color);
+    }
+
+    .play-count {
+      color: var(--color-opposite);
+      background-color: var(--color-faded);
+    }
+
+    play-button i {
+      color: var(--color-opposite);
+    }
+
+    .toggle-favorite i {
+      color: var(--color-faded);
+    }
+  }
+
+  /**
+   * album-block
+   */
+  album-block {
+
+    .other span {
+      color: var(--color-egg);
+    }
+  }
+
+  /**
+   * genre-tag
+   */
+   genre-tag {
+
+    &:hover {
+      background-color: var(--color-blend);
+    }
+
+    i {
+      color: var(--color-egg);
+    }
+  }
+
+  /**
+   * track-table
+   */
+  track-table {
+
+    table thead tr th {
+      background-color: var(--base-darker-3);
+    }
+
+    table tbody tr:nth-of-type(even) td {
+      background-color: var(--base-darker-2);
+    }
+
+    table tbody tr:hover td {
+      background-color: var(--color-blend);
+    }
+  }
+
+  /**
+   * playback-queue
+   */
+  playback-queue {
+    
+    .empty,
+    .summary, 
+    .controls i {
+      color: var(--color-opposite);
+    }
+  }
+
+  /**
+   * playback-queue
+   */
+  local-importer {
+
+    .title,
+    .announcer {
+      color: var(--color-opposite);
+    }
+  }
+
+  /**
+   * Other
+   */
+  ui-listbox:after {
+    color: var(--color-egg) !important;
+  }
+
+  table code {
+    color: var(--color-opposite);
+    background-color: var(--color-blend);
+  }
+}

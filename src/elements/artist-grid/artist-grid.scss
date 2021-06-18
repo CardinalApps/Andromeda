@@ -1,0 +1,63 @@
+//
+// <artist-grid>
+//
+artist-grid {
+  width: 100%;
+  display: block;
+
+  &.no-artists {
+    display: none;
+  }
+
+  // used on main archive
+  &[size="full"] {
+    
+    .grid artist-block {
+      width: calc(12.5% - 20px);
+      margin: 0 10px 30px 10px;
+    }
+  }
+
+  .grid {
+    width: calc(100% + 20px);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(14.2857% - 20px);
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(16.6666% - 20px);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(20% - 20px);
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(25% - 20px);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(33.3333% - 20px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(50% - 20px);
+  }
+}

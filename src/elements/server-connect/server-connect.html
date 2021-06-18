@@ -1,0 +1,48 @@
+<div class="grab"></div>
+
+<div class="row">
+  <form id="create-server-connection" class="compact">
+    <div class="logo">
+      <img src="./images/bird.svg" class="bird" alt="Cardinal Logo" title="{i18n{server-connect.logo-title}}">
+    </div>
+
+    <h2 class="form-title">{i18n{server-connect.form-title}}</h2>
+
+    <div class="connection-failed-message error-message message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{i18n{server-connect.connection-failed}}</span>
+    </div>
+
+    <div class="autoconnect-failed-message warning-message message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{i18n{server-connect.autoconnect-failed}}</span>
+    </div>
+
+    <div class="form-group field">
+      <input class="req" type="text" name="host" data-label="{i18n{server-connect.form-field.host}}">
+    </div>
+
+    <div class="form-group field">
+      <input class="req" type="text" name="port" data-label="{i18n{server-connect.form-field.port}}">
+    </div>
+
+    <footer>
+      <div class="buttons full-width">
+        <button type="submit">{i18n{server-connect.form-submit}}</button>
+      </div>
+    </footer>
+  </form>
+</div>
+
+<div class="row">
+  <div class="connection-help slidetoggle">
+    <button class="label link">
+      <span tabindex="-1">
+        <i class="fas fa-question-circle"></i>
+        {i18n{server-connect.help-c2a}}
+      </span>
+    </button>
+
+    <div class="text-content content">{i18n{server-connect.help-body}}</div>
+  </div>
+</div>

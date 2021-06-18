@@ -1,0 +1,37 @@
+<!-- Associated model: album.js -->
+
+<div class="view-content has-fixed-header">
+  <!-- top header -->
+  <header>
+    <div class="location">
+      <p class="breadcrumbs">{i18n{breadcrumbs.music-library}} / {i18n{breadcrumbs.music-release}}</p>
+      <h1 title="{{release_title}}">{{release_title}}</h1>
+    </div>
+  </header>
+
+  <div id="single-album-layout">
+    <section class="this-album">
+      <div class="cols">
+        <!-- left column -->
+        <div class="art-col">
+          <div class="elevator">
+            <release-metadata albumid="{{id}}"></release-metadata>
+          </div>
+        </div>
+
+        <!-- right column -->
+        <div class="tracks-col">
+          <!-- album tracks -->
+          <track-list albumid="{{id}}"></track-list>
+        </div>
+      </div>
+    </section>
+
+    <!-- all albums by the artist -->
+    <section class="related-albums">
+      <h3>{i18n{view.album.related.title}} {{artist_name}}</h3>
+
+      <album-grid ids='{{artistAlbums}}' size="full" order="desc" orderby="release_year"></album-grid>
+    </section>
+  </div>
+</div>

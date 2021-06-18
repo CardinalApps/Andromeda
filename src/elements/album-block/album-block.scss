@@ -1,0 +1,144 @@
+//
+// <album-block>
+//
+album-block {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: block;
+
+  // when interacting with thumbnail block
+  &.interacting {
+
+    .art-inner {
+      opacity: 1 !important;
+    }
+  }
+
+  .art:hover,
+  &.child-focused {
+    
+    .art-inner {
+      opacity: 1;
+      // idk why, but using the same border radius (which should be correct) creates artifacts in the corners.
+      // 1px less fixes it.
+      border-radius: calc(var(--border-radius-small) - 1px);
+    }
+  }
+
+  .inner {
+    width: 100%;
+    position: relative;
+  }
+
+  .art {
+    padding-top: 100%;
+    position: relative;
+    @include pop(true);
+    background: {
+      repeat: no-repeat;
+      position: center center;
+      size: cover;
+    }
+
+    a, span[tabindex="-1"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: var(--border-radius-small);
+      z-index: 1;
+    }
+
+    .art-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      background: var(--part-transparent-gradient);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      z-index: 2;
+    }
+
+    play-button {
+      width: 30px;
+      height: 30px;
+      margin-left: 8px;
+  
+      i {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .meta {
+    padding: 9px 5px 0 5px;
+  }
+
+  // truncate on 2nd line
+  .title {
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    color: var(--color-opposite);
+    
+    a {
+      font: 400 13px var(--base-font);
+      color: var(--color-opposite);
+    }
+  }
+
+  .other {
+    display: flex;
+
+    a, span {
+      font: 12px var(--base-font);
+      color: var(--color-faded);
+    }
+
+    .artist {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      display: block;
+    }
+
+    span {
+      margin-right: 6px;
+    }
+
+    span:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  ul.metadata {
+    max-width: 200px;
+    margin: 0 auto 25px;
+
+    li {
+      margin-bottom: 7px;
+      display: flex;
+      justify-content: space-between;
+      font: 13px var(--base-font);
+      color: var(--color-cream);
+    }
+
+    .label {
+      font-weight: 600;
+    }
+  }
+}

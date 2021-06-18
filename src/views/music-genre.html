@@ -1,0 +1,16 @@
+<!-- Associated model: music-genre.js -->
+
+<div class="view-content has-fixed-header">
+  <!-- top header -->
+  <header>
+    <div class="location">
+      <p class="breadcrumbs">{i18n{breadcrumbs.music-library}} / {i18n{breadcrumbs.genre}}</p>
+      <h1 title="{{genre_name}}">{{genre_name}}</h1>
+    </div>
+  </header>
+
+  <div id="single-genre-layout">
+    <artist-grid ids="{{artistIds}}" size="full" titlestring="{{artistGridTitle}}"></artist-grid>
+    <album-grid ids="{{albumIds}}" size="full" titlestring="{{albumGridTitle}}"></album-grid>
+  </div>
+</div>

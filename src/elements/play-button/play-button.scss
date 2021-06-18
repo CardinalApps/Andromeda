@@ -1,0 +1,101 @@
+play-button {
+  width: 46px; // overrideable default
+  height: 46px; // overrideable default
+  display: block;
+
+  &[state="playing"] {
+    i.play { display: none; }
+    i.pause { display: none; }
+    .playing-animation { display: flex; }
+  }
+
+  &[state="paused"] {
+    i.play { display: none; }
+    i.pause { display: none; }
+
+    .playing-animation {
+      display: flex;
+
+      .bar {
+        height: 15% !important;
+        animation: none !important;
+      }
+    }
+  }
+
+  &.dark-bg {
+
+    &:hover button {
+      background: var(--accent-color);
+    }
+   
+    button {
+      background: var(--base-lighter-2);
+    }
+
+    i {
+      color: var(--color-extreme);
+    }
+  }
+
+  button {
+    @include remove-button-styles();
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    position: relative;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background: var(--accent-color);
+  }
+
+  div[tabindex="-1"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  i {
+    font-size: 18px; // overrideable default
+    color: white;
+    position: relative;
+    right: -2px;
+    pointer-events: none;
+  }
+
+  i.pause {
+    display: none;
+  }
+
+  .playing-animation {
+    display: none;
+  }
+}
+
+play-button[mode="simple"] {
+
+  button {
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
+    border: none;
+    background: none;
+
+    &:hover {
+      
+      i {
+        color: var(--accent-color);
+      }
+    }
+
+    i {
+      font-size: 14px;
+      color: var(--color-faded);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+#single-playlist-layout {
+  padding-top: var(--focus-space);
+
+  .playlist-meta {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .play-now {
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    play-button {
+      margin-right: 10px;
+    }
+  }
+}

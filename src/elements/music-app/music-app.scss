@@ -1,0 +1,148 @@
+//
+// <music-app>
+//
+music-app {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  &.shift-down {
+    [on-shift-down] {
+      display: block !important;
+    }
+  }
+  &.ctrl-down {
+    [on-ctrl-down] {
+      display: block !important;
+    }
+  }
+  &.option-down {
+    [on-option-down] {
+      display: block !important;
+    }
+  }
+  &.cmd-down {
+    [on-cmd-down] {
+      display: block !important;
+    }
+  }
+
+  &[os="darwin"] {
+
+    .darwin-only {
+      display: block;
+  
+      &.inline {
+        display: inline;
+      }
+    }
+  
+    .win32-only {
+      display: none !important;
+    }
+  }
+
+  &[os="win32"] {
+
+    .win32-only {
+      display: block;
+  
+      &.inline {
+        display: inline;
+      }
+    }
+  
+    .darwin-only {
+      display: none !important;
+    }
+  }
+
+  // when the setting panel is open
+  &.settings-open {
+  
+    #nav-pillar {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  // adjustments when the app has no music
+  &.no-music {
+
+    // don't bother the user with the media keys accessibility notification until there's music to play
+    .theme-notification#media-key-accessibility-dialogue {
+      display: none;
+    }
+
+    // show an empty message in the view column
+    #view-pillar .empty-message.common-message {
+      display: flex;
+    }
+
+    // hide some core elements (because they might be showing a title with no content, but listening for importer messages)
+    artist-grid,
+    album-grid,
+    track-table,
+    genre-tags {
+      display: none;
+    }
+  }
+
+  &.queue-open {
+    
+    #queue-pillar {
+      display: block;
+    }
+  }
+
+  .favorite-genres {
+    padding-left: 12px;
+
+    genre-tag {
+      background-color: var(--base-darker-3);
+
+      &:first-of-type {
+        margin-top: 12px;
+      }
+
+      &:hover {
+        background-color: var(--base-darker-2);
+      }
+    }
+  }
+
+  #back-button {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 47px;
+    left: 12px;
+    z-index: 100;
+  }
+
+  [data-modal] {
+    cursor: pointer;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .modal-content-element {
+    display: none;
+  }
+}
+
+#context-menu-for-main-dot-menu {
+  min-width: 200px;
+
+  .group-name {
+    display: block !important;
+  }
+
+  .context-menu-item {
+
+    span {
+      font-weight: 600;
+    }
+  }
+}

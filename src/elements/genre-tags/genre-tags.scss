@@ -1,0 +1,8 @@
+genre-tags {
+  padding-top: var(--focus-space);
+  display: block;
+
+  &.no-genres {
+    display: none;
+  }
+}

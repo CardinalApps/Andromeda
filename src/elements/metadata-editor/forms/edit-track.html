@@ -1,0 +1,59 @@
+<form id="track-metadata" class="compact">
+  {inc{/elements/metadata-editor/forms/includes/header.html}}
+
+  <!-- title -->
+  <div class="form-group">
+    <input class="req use-as-subtitle" type="text" name="track_title" value="{{track_title}}" data-label="{i18n{column.track_title}}">
+  </div>
+
+  <!-- album -->
+  <!-- user will enter a string as the "ID". the main process will handle
+  converting that string to a new artist or not -->
+  <div class="form-group">
+    <input class="req" type="text" name="track_release_id" value="{{release_title}}" data-label="{i18n{column.release_title}}">
+  </div>
+
+  <!-- artist -->
+  <!-- user will enter a string as the "ID". the main process will handle
+  converting that string to a new artist or not -->
+  <div class="form-group">
+    <input class="req" type="text" name="track_artist_id" value="{{artist_name}}" data-label="{i18n{column.artist_name}}">
+  </div>
+
+  <!-- year and track num -->
+  <div class="form-group inline-fields">
+    <div class="year-field inline-s">
+      <input type="number" name="track_date" maxlength="4" min="0" max="9999" value="{{track_date}}" data-label="{i18n{column.track_date}}">
+    </div>
+
+    <div class="track-number-field inline-xs">
+      <input type="number" name="track_num" maxlength="4" min="1" max="9999" data-label="{i18n{column.track_num}}" value="{{track_num}}">
+    </div>
+  </div>
+
+  <!-- disc -->
+  <div class="track-and-disc-group form-group inline-fields">
+    <div class="this-disc-field inline-xs pull-right">
+      <input type="number" name="this-disc" maxlength="2" min="1" max="99" data-label="{i18n{column.track_disc}}" value="{{thisDisc}}">
+    </div>
+
+    <span class="inline-field-sep-label">{i18n{metadata-editor.total-discs-label}}</span>
+  
+    <div class="total-discs-field inline-xs">
+      <input type="number" name="total-discs" maxlength="2" min="1" max="99" value="{{totalDiscs}}">
+    </div>
+  </div>
+
+  <!-- genres -->
+  <div class="form-group">
+    <select class="genres" name="track_genre_ids" data-ids="*" multiple data-label="{i18n{metadata-editor.genres}}" data-selected='{{genreIds}}'></select>
+  </div>
+
+  <!-- path -->
+  <div class="form-group">
+    <input class="req" type="text" name="track_path" value="{{track_path}}" data-label="{i18n{column.track_path}}">
+  </div>
+
+  <!-- controls -->
+  {inc{/elements/metadata-editor/forms/includes/controls.html}}
+</form>

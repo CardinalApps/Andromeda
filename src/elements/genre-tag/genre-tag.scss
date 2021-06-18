@@ -1,0 +1,97 @@
+$genre-tag-border-radius: 20px;
+
+genre-tag {
+  margin: 0 6px 6px 0;
+  display: inline-block;
+  border-radius: $genre-tag-border-radius;
+  background: var(--base-darker-2);
+
+  &:hover {
+    background: var(--base-lighter-2);
+  }
+
+  &[large] {
+    margin: 0 10px 10px 0;
+
+    a.router-link {
+      font-size: 16px;
+
+      .name {
+        padding: 12px 20px;
+      }
+    }
+  }
+
+  &[small] {
+    margin: 0 4px 4px 0;
+    
+    a.router-link {
+      font-size: 11px !important;
+
+      .name {
+        padding: 6px 10px;
+      }
+    }
+  }
+
+  &[canfavorite] {
+
+    &[large] {
+
+      a.router-link .name {
+        padding-right: 49px;
+      }
+    }
+
+    .toggle-favorite {
+      display: block;
+    }
+  }
+
+  &.is-favorite {
+
+    .toggle-favorite i {
+      color: var(--accent-color);
+    }
+  }
+
+  .inner {
+    display: block;
+    position: relative;
+  }
+
+  a.router-link {
+    font: 14px var(--accent-font);
+    color: var(--color-opposite);
+    display: block;
+    border-radius: $genre-tag-border-radius;
+
+    .name {
+      padding: 11px 18px;
+      display: block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  // meant to be used only with the large size
+  button.toggle-favorite {
+    @include remove-button-styles();
+    display: none;
+    position: absolute;
+    top: 13px;
+    right: 19px;
+
+    span[tabindex="-1"] {
+      display: block;
+    }
+
+    i {
+      color: var(--color-blend);
+      font-size: 15px;
+      line-height: 1.2em;
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,129 @@
+//
+// <dot-menu>
+//
+dot-menu {
+  width: 30px;
+  height: 30px;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  position: relative;
+  cursor: pointer;
+  transition: all 150ms, background-color 100ms;
+  background-color: var(--base-lighter-2);
+  -webkit-app-region: no-drag;
+
+  &:hover {
+    background: var(--accent-color);
+  }
+
+  // default dot-menus have a clicky feel
+  &:active.large {
+    transform: scale(0.90);
+  }
+
+  &.open:not(.slim):not(.large) {
+    background-color: var(--accent-color);
+
+    .dot { background: white; }
+  }
+
+  &.open.large {
+    
+    .dots {
+      transform: scale(0.86);
+    }
+  }
+
+  &.slim {
+    background: none;
+
+    .dot { background: var(--accent-color); }
+  }
+
+  &.large {
+
+    .tier {
+      padding: 1.5px 0;
+    }
+
+    .dot { 
+      width: 5px;
+      height: 5px;
+     }
+  }
+
+  &.white {
+
+    .dot { background: white; }
+  }
+
+  button {
+    @include remove-button-styles();
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: none; // undo default hover
+    }
+  }
+
+  .dots {
+    width: 26px;
+    height: 26px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-items: center;
+    transition: transform 175ms;
+  }
+
+  .tier {
+    width: 100%;
+    padding: 1px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background: white;
+  }
+
+
+  // animation
+  &.orbit {
+    
+    .dot._1 {
+      animation-name: orbit-dot;
+      animation-duration: 1975ms;
+      animation-delay: 525ms;
+      animation-fill-mode: forwards;
+      transform-origin: 50% calc(100% + 5px);
+    }
+
+    .dot._3 {
+      animation-name: orbit-dot;
+      animation-duration: 2500ms;
+      animation-fill-mode: forwards;
+      transform-origin: 50% -5px;
+    }
+  }
+}
+
+@keyframes orbit-dot {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,30 @@
+<div class="inner">
+  <div class="art" {{art}}>
+    <div class="art-inner">
+      <div class="controls">
+        <dot-menu></dot-menu>
+        <play-button albumid="{{id}}" class="dark-bg"></play-button>
+      </div>
+
+      <a href="{{link}}" class="router-link"><span tabindex="-1"></span></a>
+    </div>
+  </div>
+  
+  <div class="meta">
+    <p class="title" title="{{release_title}}">
+      <!-- the tabindex="-1" on the <a> prevents the user from tabbing to it -->
+      <a href="{{link}}" class="router-link" tabindex="-1">
+        <!-- the tabindex="-1" on the <span> prevents mouse click from focusing the <a> -->
+        <span tabindex="-1">{{release_title}}</span>
+      </a>
+    </p>
+    <p class="other">
+      <span class="artist" title="{{artist}}">
+        <a href="{{artistLink}}" class="router-link" tabindex="-1">
+          <span tabindex="-1">{{artist}}</span>
+        </a>
+      </span>
+      <span class="date">{{date}}</span>
+    </p>
+  </div>
+</div>

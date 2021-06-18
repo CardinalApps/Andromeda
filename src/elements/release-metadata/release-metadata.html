@@ -1,0 +1,35 @@
+<div class="art" {{art}}></div>
+
+<div class="controls">
+  <play-button albumid="{{id}}"></play-button>
+  <p>{i18n{play}}</p>
+</div>
+
+<ul class="metadata">
+  <li>
+    <span class="label">{i18n{release-metadata.artist}}</span>
+    <span class="value" title="{{artist}}">
+      <a href="{{artistLink}}" class="router-link"><span tabindex="-1">{{artist}}</span></a>
+    </span>
+  </li>
+  <li>
+    <span class="label">{i18n{release-metadata.year}}</span>
+    <span class="value">{{release_year}}</span>
+  </li>
+  <li>
+    <span class="label">{i18n{release-metadata.duration}}</span>
+    <span class="value">{{duration}}</span>
+  </li>
+  <li>
+    <span class="label">{{typeLabel}}</span>
+    <span class="value">{{fileTypes}}</span>
+  </li>
+  <li>
+    <span class="label">{i18n{release-metadata.average-bitrate}}</span>
+    <span class="value">{{averageBitrate}}</span>
+  </li>
+</ul>
+
+<div class="genres">
+  {{genres}}
+</div>

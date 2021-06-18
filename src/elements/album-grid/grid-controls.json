@@ -1,0 +1,34 @@
+[
+  {
+    "type": "cycle-button",
+    "title": "{i18n{control-group.cycle-button.name-asc-desc}}",
+    "cycle": [
+      { 
+        "values": {"order": "desc", "orderby": "release_plaintext_title"},
+        "icon": "sort-alpha-up",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.name-desc.aria-assertive-change-message}}"
+      },
+      {
+        "values": {"order": "asc", "orderby": "release_plaintext_title"},
+        "icon": "sort-alpha-down",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.name-asc.aria-assertive-change-message}}"
+      }
+    ]
+  },
+  {
+    "type": "cycle-button",
+    "title": "{i18n{control-group.cycle-button.year-asc-desc}}",
+    "cycle": [
+      {
+        "values": {"order": "asc", "orderby": "release_year"},
+        "icon": "sort-numeric-down",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.year-asc.aria-assertive-change-message}}"
+      },
+      { 
+        "values": {"order": "desc", "orderby": "release_year"},
+        "icon": "sort-numeric-up",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.year-desc.aria-assertive-change-message}}"
+      }
+    ]
+  }
+]

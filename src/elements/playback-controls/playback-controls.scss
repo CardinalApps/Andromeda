@@ -1,0 +1,477 @@
+//
+// <playback-controls>
+//
+$scrubber-height: 3px;
+
+// these two must add up to var(--playback-controls-height).
+$waveform-height: 60px; // also change in waveform.js
+$waveform-padding: 10px;
+
+playback-controls {
+  width: 100%;
+  height: var(--playback-controls-height);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5000;
+  display: block;
+  overflow: hidden;
+  background: var(--base-darker-1);
+
+  // when audio is playing
+  &.playing {
+    .time { opacity: 1; }
+    .scrubber .mousehandler { cursor: ew-resize; }
+  }
+
+  &.paused {
+    .time { opacity: 1; }
+    .scrubber .mousehandler { cursor: ew-resize; }
+  }
+
+  // nothing going on
+  &.stopped {
+    .time { opacity: 0; }
+  }
+
+  // while the Player object is loading the track
+  &.loading {
+    track-block { opacity: 0.4; }
+    .currently-playing:before { opacity: 1; }
+  }
+
+  &.shuffle-on {
+    button.shuffle i { color: var(--accent-color); }
+  }
+
+  &.repeat-track {
+
+    button.repeat {
+      position: relative;
+
+      &:before {
+        @include icon('\f068');
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        border-radius: 100%;
+        font-size: 8px;
+        color: var(--color-cream);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        background-color: var(--base-lighter-2);
+      }
+
+      i {
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  &.repeat-queue {
+
+    button.repeat {
+      position: relative;
+
+      &:before {
+        @include icon('\f0c9');
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        border-radius: 100%;
+        font-size: 9px;
+        color: var(--color-cream);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        background-color: var(--base-lighter-2);
+      }
+
+      i {
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  &.muted {
+
+    button.mute {
+      .fa-volume-up { display: none; }
+      .fa-volume-mute { display: block; }
+    }
+  }
+
+  // for all buttons
+  button {
+    transition: all 125ms;
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    i {
+      line-height: 1.6em !important;
+      display: block;
+  
+      &:before {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .loading-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .scrubber {
+    @include remove-button-styles();
+    width: 100%;
+    height: $scrubber-height;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--base-lighter-1);
+    transition: height 350ms;
+    z-index: 2;
+
+    &:active {
+      transform: none !important;
+    }
+
+    &.expanded {
+      height: 100%;
+
+      .progress {
+        opacity: 0.5;
+      }
+    }
+
+    &.dragging {
+
+      .progress {
+        transition: none;
+      }
+
+      .scrubber-time {
+        opacity: 1;
+      }
+    }
+
+    .mousehandler {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    // width will be defined inline by js
+    .progress {
+      width: 0;
+      height: 100%;
+      background: var(--accent-color);
+      transition: all 500ms;
+      pointer-events: none;
+    }
+
+    .waveform-container {
+      width: 100%;
+      height: $waveform-height;
+      position: absolute;
+      top: $waveform-padding;
+      left: 0;
+      right: 0;
+      bottom: $waveform-padding;
+    }
+
+    .scrubber-time {
+      padding: 5px 10px;
+      border-radius: 15px;
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      font: 12px var(--base-font);
+      color: var(--color-opposite);
+      z-index: 2;
+      opacity: 0;
+      background: rgba(0, 0, 0, .7);
+      transition: opacity 200ms;
+    }
+  }
+
+  .cols {
+    width: 100%;
+    height: calc(100% - #{$scrubber-height});
+    padding-top: 4px;
+    display: flex;
+    justify-content: space-between;
+
+    .col {
+      display: flex;
+      align-items: center;
+      padding-top: 1px;
+    }
+  }
+
+  .left-col {
+    width: 33.3333%;
+    padding-left: 20px;
+    position: relative;
+    justify-content: flex-start;
+  }
+
+  .right-col {
+    width: 33.3333%;
+    padding-right: 20px;
+    overflow: hidden;
+    justify-content: flex-end;
+  }
+
+  .center-col {
+    width: 33.3333%;
+    display: flex;
+    justify-content: center;
+
+    .left, 
+    .right {
+      display: flex;
+    }
+
+    .left {
+      justify-content: flex-end;
+    }
+
+    .center {
+      margin: 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .currently-playing {
+    width: 100%;
+
+    &:before {
+      content: '';
+      width: 21px;
+      height: 22px;
+      margin-top: -11px;
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      //transition: opacity 50ms;
+      background: {
+        repeat: no-repeat;
+        size: contain;
+        position: center center;
+        image: url('../../images/loading.svg');
+      }
+    }
+  }
+
+  track-block {
+    width: 100%;
+    transition: opacity 50ms;
+  }
+
+  button.repeat {
+    @include remove-button-styles();
+    font-size: 15px;
+
+    i {
+      color: var(--color-faded);
+    }
+  }
+
+  button.shuffle {
+    @include remove-button-styles();
+    font-size: 18px;
+
+    i {
+      color: var(--color-faded);
+    }
+  }
+
+  button.-previous {
+    @include remove-button-styles();
+    margin: 0 15px;
+    font-size: 24px;
+
+    i {
+      color: var(--color-extreme);
+    }
+  }
+
+  button.-playPause {
+    @include remove-button-styles();
+    margin: 0 15px;
+    padding: 0;
+    font-size: 37px;
+
+    i {
+      color: var(--color-extreme);
+    }
+  }
+
+  button.-next {
+    @include remove-button-styles();
+    margin: 0 15px;
+    font-size: 24px;
+
+    i {
+      color: var(--color-extreme);
+    }
+  }
+
+  .time {
+    margin: 0 10px;
+    transition: opacity 100ms;
+    font: 13px var(--base-font);
+    color: var(--color-opposite);
+    opacity: 0;
+    white-space: nowrap;
+
+    .current {
+      color: var(--color-opposite);
+
+      &:after {
+        content: '/';
+        margin: 0 0 0 4px;
+        color: var(--color-faded);
+      }
+    }
+
+    .duration {
+      color: var(--color-faded);
+    }
+  }
+
+  button.mute {
+    width: 19px;
+    text-align: left;
+    @include remove-button-styles();
+    margin: 0 10px;
+    position: relative;
+    top: 2px;
+
+    i {
+      color: var(--color-opposite);
+      font-size: 16px;
+    }
+
+    .fa-volume-mute {
+      display: none;
+    }
+  }
+
+  button.queue {
+    @include remove-button-styles();
+    margin: 0 0 0 10px;
+    position: relative;
+    top: 2px;
+
+    i {
+      color: var(--color-opposite);
+      font-size: 16px;
+    }
+  }
+}
+
+music-app.queue-open {
+
+  playback-controls {
+
+    button.queue {
+
+      i {
+        color: var(--accent-color);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+
+  playback-controls {
+
+    .left-col {
+      width: calc(100% - 240px - 100px);
+      flex-grow: 1;
+    }
+
+    .center-col {
+      width: 240px;
+      flex-shrink: 0;
+      position: relative;
+      justify-content: flex-end;
+
+      .center {
+        margin: 0;
+        padding-right: 50px;
+      }
+      
+      .right {
+        width: 30px;
+        height: 50%;
+        position: absolute;
+        top: 0;
+        right: 6px;
+        order: 2;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .left {
+        width: 30px;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        right: 6px;
+        align-items: flex-start;
+        justify-content: center;
+      }
+    }
+
+    .right-col {
+      width: 100px;
+      flex-wrap: wrap;
+      align-content: center;
+      flex-shrink: 0;
+
+      .time {
+        width: 100%;
+        text-align: right;
+        margin-right: 0;
+        margin-bottom: 3px;
+        opacity: 1 !important;
+      }
+
+      button {
+        margin: 0 0 0 12px;
+        top: 5px;
+
+        i {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,41 @@
+<!-- Associated model: artist.js -->
+
+{{artistBg}}
+
+<div class="view-content has-fixed-header">
+  <header>
+    <div class="location">
+      <p class="breadcrumbs">{i18n{breadcrumbs.music-library}} / {i18n{breadcrumbs.artist}}</p>
+      <h1 title="{{artist_name}}">{{artist_name}}</h1>
+    </div>
+  </header>
+
+  <div id="single-artist-layout">
+    <section class="top-level-section">
+      <genre-tags ids="{{genres}}" class="genres"></genre-tags>
+    </section>
+
+    <section class="top-level-section">
+      <!-- favorite songs -->
+      <track-list artistid="{{id}}" mode="favorites" class="cols _3"></track-list>
+
+      <!-- top tracks -->
+      <track-list ids="{{topTracks}}" class="cols _3 limit-on-small-screen" titlei18nkey="view.artist.most-played.title"></track-list>
+    </section>
+
+    <section class="top-level-section">
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="album" titlei18nkey="view.artist.release-type.albums"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="single" titlei18nkey="view.artist.release-type.singles"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="ep" titlei18nkey="view.artist.release-type.eps"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="compilation" titlei18nkey="view.artist.release-type.compilations"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="soundtrack" titlei18nkey="view.artist.release-type.soundtrack"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="live" titlei18nkey="view.artist.release-type.live"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="remix" titlei18nkey="view.artist.release-type.remix"></album-grid>
+      <album-grid artistid="{{id}}" size="full" orderby="release_year" order="desc" releasetype="other" titlei18nkey="view.artist.release-type.other"></album-grid>
+    </section>
+
+    <section class="top-level-section">
+      <artist-grid genres="{{genres}}" exclude="{{id}}" size="full" titlei18nkey="view.artist.similar-artists.title"></artist-grid>
+    </section>
+  </div>
+</div>

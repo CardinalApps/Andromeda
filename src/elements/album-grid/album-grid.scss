@@ -1,0 +1,95 @@
+//
+// <album-grid>
+//
+album-grid {
+  width: 100%;
+  display: block;
+
+  // used when the albums take up the entire width of the view
+  &[size="full"] {
+    
+    .grid album-block {
+      width: calc(12.5% - 20px);
+      height: auto;
+      margin: 0 10px 30px 10px;
+    }
+  }
+
+  // used when the albums take up approx half the view width
+  &[size="med"] {
+
+    .grid album-block {
+      width: calc(25% - 20px);
+      height: auto;
+      margin: 0 10px 30px 10px;
+    }
+
+    .other .artist {
+      display: none;
+    }
+  }
+
+  .grid {
+    width: calc(100% + 20px);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(14.2857% - 20px);
+  }
+
+  album-grid[size="med"] .grid album-block {
+    width: calc(33.3333% - 20px);
+  }
+}
+
+
+@media screen and (max-width: 1700px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(16.6666% - 20px);
+  }
+}
+
+
+@media screen and (max-width: 1500px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(20% - 20px);
+  }
+}
+
+
+@media screen and (max-width: 1300px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(25% - 20px);
+  }
+
+  album-grid[size="med"] .grid album-block {
+    width: calc(50% - 20px);
+  }
+}
+
+
+@media screen and (max-width: 1100px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(33.3333% - 20px);
+  }
+
+  album-grid[size="med"] .grid album-block {
+    width: calc(33.3333% - 20px);
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+  album-grid[size="full"] .grid album-block {
+    width: calc(50% - 20px);
+  }
+
+  album-grid[size="med"] .grid album-block {
+    width: calc(50% - 20px);
+  }
+}

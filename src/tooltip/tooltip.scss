@@ -1,0 +1,24 @@
+.the-tooltip {
+  max-width: 260px;
+  position: absolute;
+  pointer-events: none;
+  z-index: 6000; // can appear above modals
+  transform: translate(-50%, -100%);
+
+  .inner {
+    padding: 9px 15px;
+    font: 13px/1.7em var(--base-font);
+    color: var(--color-opposite);
+    border-radius: var(--border-radius-small);
+    background: var(--almost-black);
+    transition: opacity 250ms;
+
+    &:after {
+      content: '';
+      @include triangle-down(10px, var(--almost-black));
+      position: absolute;
+      left: calc(50% - 10px);
+      bottom: -10px;
+    }
+  }
+}

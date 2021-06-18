@@ -1,0 +1,85 @@
+<!-- Messages that the user might see -->
+<div class="messages">
+  <div class="common-message import-must-finish-message">
+    <span><i class="fas fa-dolly"></i> {i18n{media-feed.waiting-for-import-to-finish}}</span>
+  </div>
+  <div class="common-message building-feed-message">
+    <span>{inc{/images/loading.svg}} {i18n{media-feed.building-feed}}</span>
+  </div>
+  <div class="common-message not-enough-music-message">
+    <span><i class="fas fa-heart-broken"></i> {i18n{media-feed.not-enough-music}}</span>
+  </div>
+</div>
+
+<!-- Feed settings -->
+<!-- <section class="feed-controls">
+  <button type="button" class="settings-toggle">
+    <span tabindex="-1">
+      <span class="label">{i18n{media-feed.settings-button}}</span>
+      <i class="fas fa-balance-scale"></i>
+    </span>
+  </button>
+</section> -->
+
+<!-- Holds the feed content, gets dynamically refreshed -->
+<section class="content-feed" data-end-message="{i18n{media-feed.end}}"></section>
+
+<!-- The layout for the static top portion of the feed -->
+<template class="static-top">
+  <!-- Top Albums -->
+  <div class="feed-layout-container solid half">
+    <media-feed-top-albums class="media-feed-block"></media-feed-top-albums>
+  </div>
+
+  <!-- Top Songs -->
+  <div class="feed-layout-container solid half">
+    <media-feed-top-tracks class="media-feed-block"></media-feed-top-tracks>
+  </div>
+
+  <div class="feed-layout-container big-buttons _4">
+    <!-- 200 Random Songs Button -->
+    <media-feed-shuffle-music rand="*" class="media-feed-block big-button"></media-feed-shuffle-music>
+
+    <!-- Random Album Button -->
+    <media-feed-shuffle-music rand="album" class="media-feed-block big-button"></media-feed-shuffle-music>
+
+    <!-- Random Artist Button  -->
+    <media-feed-shuffle-music rand="artist" class="media-feed-block big-button"></media-feed-shuffle-music>
+
+    <!-- Random Genre Button -->
+    <media-feed-shuffle-music genreid="rand" class="media-feed-block big-button"></media-feed-shuffle-music>
+  </div>
+
+  <!-- Recently Played Albums -->
+  <div class="feed-layout-container full">
+    <media-feed-recently-played-albums class="media-feed-block"></media-feed-recently-played-albums>
+  </div>
+
+  <!-- Recently Added Albums -->
+  <div class="feed-layout-container full">
+    <media-feed-recently-added-albums class="media-feed-block"></media-feed-recently-added-albums>
+  </div>
+
+  <!-- Albums With Favorites -->
+  <div class="feed-layout-container full">
+    <media-feed-albums-with-favorites class="media-feed-block"></media-feed-albums-with-favorites>
+  </div>
+</template>
+
+<template class="artist">
+  <div class="feed-layout-container">
+    <media-feed-artist class="media-feed-block"></media-feed-artist>
+  </div>
+</template>
+
+<template class="album">
+  <div class="feed-layout-container full">
+    <media-feed-album class="media-feed-block"></media-feed-album>
+  </div>
+</template>
+
+<template class="genre">
+  <div class="feed-layout-container full">
+    <media-feed-genre class="media-feed-block"></media-feed-genre>
+  </div>
+</template>

@@ -1,0 +1,67 @@
+@mixin active-outline() {
+  box-shadow: 0 0 5px 2px var(--accent-color);
+  outline: none;
+}
+
+@mixin icon($icon) {
+    display: inline-block;
+    font-style: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: $icon;
+}
+
+@mixin icon-color($color) {
+    color: $color;
+
+    &:before, &:after {
+      color: $color;
+    }
+}
+
+@mixin triangle-down($size, $color) {
+  width: 0; 
+  height: 0; 
+  border-left: $size solid transparent;
+  border-right: $size solid transparent;
+  border-top: $size solid $color;
+}
+
+@mixin remove-button-styles() {
+  padding: 0;
+  text-align: left;
+  border: none;
+  background: none;
+  -webkit-appearance: none;
+}
+
+@mixin inset-text() {
+  text-shadow: 1px 4px 6px var(--base-color), 0 0 0 #000, 1px 4px 6px var(--base-color);
+}
+
+/**
+ * Used to make album art pop out a bit.
+ * 
+ * @param {boolean} $willAnimate - Set to true to include transiton properties.
+ */
+@mixin pop($willAnimate: false) {
+  //border: 1px solid var(--base-darker-2);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius-small);
+
+  @if ($willAnimate) {
+    transition: box-shadow 200ms, transform 200ms;
+  }
+}
+
+@mixin loading-content($height: 11px, $width: 80%) {
+  content: '';
+  width: $width;
+  height: $height;
+  margin-bottom: 2px;
+  border-radius: 2px;
+  display: block;
+  background: var(--base-lighter-3);
+}

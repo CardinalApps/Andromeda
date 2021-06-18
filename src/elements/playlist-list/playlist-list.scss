@@ -1,0 +1,57 @@
+//
+// <album-grid>
+//
+playlist-list {
+  display: block;
+
+  &.no-playlists {
+
+    .empty-message {
+      display: flex;
+    }
+  }
+
+  .controls {
+    min-height: 30px;
+    margin-bottom: 20px;
+    padding-top: var(--focus-space);
+
+    form#create-playlist {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      // overrides when showing the form fields
+      &.show {
+
+        button[name="show-fields"] {
+          .fa-plus { opacity: 0; }
+          .fa-minus { opacity: 1; }
+        }
+      }
+
+      .hidden-fields {
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 100ms;
+
+        &.show {
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+    }
+
+    button[name="show-fields"] {
+      .fa-minus { opacity: 0; }
+    }
+  }
+
+  .empty-message {
+    display: none;
+  }
+}

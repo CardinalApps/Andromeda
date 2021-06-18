@@ -1,0 +1,124 @@
+track-list {
+  display: block;
+
+  &[albumid] {
+    .disc-title { display: block; }
+  }
+
+  &[discs="1"] {
+    .disc-title { display: none; }
+  }
+
+  &.no-tracks {
+    display: none;
+
+    &[playlistid] {
+      display: block;
+
+      .empty-playlist {
+        display: flex;
+      }
+    }
+  }
+
+  &.cols {
+
+    &._3 {
+
+      .tracks {
+        display: flex;
+        flex-wrap: wrap;
+
+        track-block {
+          width: calc(33.3333% - 5px);
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .title-row {
+    min-height: 37px; // prevents snapping when removing tracks from a playlist
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+
+    .title {
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
+  }
+
+  .disc {
+    margin-bottom: 30px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .disc-title {
+    display: none;
+  }
+
+  .track-list-item {
+    padding-bottom: 5px;
+    transition: padding var(--dragndrop-transition-speed);
+
+    &.can-drop-top {
+      padding-top: 20px;
+    }
+
+    &.can-drop-bottom {
+      padding-bottom: 20px;
+    }
+
+    track-block {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .empty-message {
+    display: none;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+
+  track-list.cols._3 .tracks {
+
+    track-block {
+      width: calc(50% - 5px);
+    }
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  track-list.cols._3 .tracks {
+
+    track-block {
+      width: 100%;
+    }
+  }
+
+  // limit to 6 top songs
+  track-list.limit-on-small-screen {
+
+    track-block {
+      display: none;
+
+      &:nth-of-type(1),
+      &:nth-of-type(2),
+      &:nth-of-type(3),
+      &:nth-of-type(4),
+      &:nth-of-type(5),
+      &:nth-of-type(6) {
+        display: flex !important;
+      }
+    }
+  }
+
+}

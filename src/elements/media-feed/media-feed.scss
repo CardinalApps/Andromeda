@@ -1,0 +1,429 @@
+/*
+ * <media-feed>
+ */
+media-feed {
+  width: 100%;
+  padding-top: var(--focus-space);
+  display: flex;
+  flex-wrap: wrap;
+  --feed-view-left-padding: 50px;
+  --feed-view-right-padding: 45px; // -5px because of parent scrollbar adjustment
+
+  &[message="building-feed"] {
+    .building-feed-message { display: flex; }
+  }
+
+  &[message="import-must-finish"] {
+    .feed-controls { display: none; }
+    .import-must-finish-message { display: flex; }
+  }
+
+  &[message="not-enough-music"] {
+    .feed-controls { display: none; }
+    .content-feed  { display: none; }
+    .not-enough-music-message { display: flex; }
+  }
+
+  .common-message {
+    display: none;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      margin-right: 10px;
+      position: relative;
+      top: 5px;
+
+      rect {
+        fill: var(--empty-message-color);
+      }
+    }
+  }
+
+  .feed-controls {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: var(--feed-view-left-padding);
+    padding-right: var(--feed-view-right-padding);
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: flex-start;
+
+    button.settings-toggle {
+      padding: 0;
+      border-radius: 50px;
+      cursor: pointer;
+      background: var(--base-darker-3);
+
+      span[tabindex="-1"] {
+        padding: 6px 6px 6px 25px;
+        display: flex;
+        align-items: center;
+      }
+
+      i {
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        color: var(--color-cream);
+        border-radius: 100%;
+        font-size: 14px;
+        cursor: pointer;
+        background: var(--base-lighter-2);
+      }
+
+      .label {
+        margin-right: 15px;
+        font: 400 15px var(--accent-font);
+        color: var(--color-egg);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content-feed {
+    width: 100%;
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    &.loading {
+      
+      &:after {
+        content: '';
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        opacity: 0.2;
+        background: {
+          repeat: no-repeat;
+          size: contain;
+          image: url('../../images/loading.svg');
+        };
+      }
+    }
+
+    &.end {
+
+      &:after {
+        content: attr(data-end-message);
+        width: 100%;
+        height: 30px;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        @extend h4;
+      }
+    }
+
+    .feed-layout-container {
+      width: 100%;
+      margin-bottom: 40px;
+
+      &.full {
+        width: 100%;
+        padding-left: var(--feed-view-left-padding);
+        padding-right: var(--feed-view-right-padding);
+      }
+
+      &.half {
+        width: 50%;
+
+        &:nth-of-type(odd) {
+          padding-left: var(--feed-view-left-padding);
+          padding-right: 15px;
+        }
+
+        &:nth-of-type(even) {
+          padding-left: 15px;
+          padding-right: var(--feed-view-right-padding);
+        }
+      }
+
+      &.big-buttons {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .big-button {
+          width: 240px;
+          height: 210px;
+          margin: 0 15px;
+          flex-shrink: 0;
+        }
+      }
+
+      &.solid {
+        
+        .container-inner {
+          padding: 25px 35px 25px 43px;
+          //box-shadow: var(--box-shadow);
+          background: var(--base-darker-2);
+        }
+      }
+      
+      .container-inner {
+        height: 100%;
+        border-radius: var(--border-radius-large);
+      }
+    }
+
+    .container-shuffle-music {
+      justify-self: center;
+    }
+  }
+
+  .throttled {
+
+    .throttle {
+      animation: throttled 5s linear;
+    }
+  }
+}
+
+.media-feed-block {
+
+  &:hover {
+
+    .slider-controls button { opacity: 0.8; }
+  }
+
+  .media-feed-block-title {
+
+    &.accent {
+      @extend h4;
+      margin-bottom: 23px;
+      color: var(--accent-color);
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  button.media-feed-button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: block;
+    box-shadow: 0px 0px 8px -1px #1b1b1b;
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    background: none;
+    transition: all 100ms;
+
+    // Orignally, I forgot to put the initial scale value here, and it created a
+    // weird bug that:
+    //
+    // 1. Caused the "Echoes (GPU)" process to immediately run up to 50-70%
+    // and hang there until the element(s) were removed from the DOM. 
+    // 2. Caused the CPU temps and the fans to max out.
+    // 3. Only happened if music was playing at the same time.
+    // 4. And the real head scratcher... only happened when the JS was bundled.
+    //
+    // I was never able to reproduce in Electron Fiddle. However, the bug
+    // consistenly happenes in Echoes v0.1.2 and v0.1.1... but only when running
+    // the .exe/.dmg OR running in VS Code with bundled JS. I only encountered
+    // this bug on macOS Catalina.
+    transform: scale(1);
+
+    &:hover {
+
+      .inner:before {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    &.over {
+      // .969 = good text rendering on win32
+      transform: scale(0.969);
+    }
+  
+    &.press {
+      // .916 = good text rendering on win32
+      transform: scale(0.916);
+
+      .inner .icon {
+        transform: scale(0.8);
+      }
+    }
+
+    .inner {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      transition: all 300ms;
+      position: relative;
+      cursor: pointer;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        background: var(--gradient-2);
+        opacity: 0;
+        transform: scale(1.4);
+        pointer-events: none;
+        transition: all 500ms;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        background: var(--gradient);
+        pointer-events: none;
+      }
+
+      .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        z-index: 4;
+      }
+  
+      .icon {
+        font-size: 60px;
+        position: relative;
+        top: -14%;
+        cursor: pointer;
+        color: var(--accent-color);
+        transform: scale(1);
+        transition: all 150ms;
+      }
+  
+      .title {
+        width: 100%;
+        height: 60px;
+        font: 500 16px var(--accent-font);
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: var(--color-cream);
+        cursor: pointer;
+      }
+    }
+  
+    .throttle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 3;
+      pointer-events: none;
+      transition: top 5000ms, opacity 100ms;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+@media screen and (max-width: 1450px) {
+
+  media-feed {
+
+    .feed-layout-container.big-buttons._4 {
+      width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .big-button {
+        margin: 0 15px 30px;
+
+        &:nth-of-type(3) {
+          margin-bottom: 0;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  media-feed {
+
+    .feed-layout-container.half {
+      width: 100% !important;
+      margin-left: 0;
+      margin-right: 0;
+      padding-right: var(--feed-view-right-padding) !important;
+      padding-left: var(--feed-view-left-padding) !important;
+    }
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+
+  media-feed {
+
+    .feed-layout-container.big-buttons._4 {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+
+      .big-button {
+        width: 220px;
+        margin: 0 8px 16px;
+
+        &:nth-of-type(3) {
+          margin-bottom: 16px;
+        }
+  
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+}
+
+@keyframes throttled {
+  from {
+    opacity: 0;
+    top: 0;
+  }
+
+  5% {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0.3;
+    top: 100%;
+  }
+}

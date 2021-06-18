@@ -1,0 +1,16 @@
+@function getExtremeOppositeColor($color) {
+  @if (lightness($color) > 50) {
+    @return #000000;
+  } @else {
+    @return #ffffff;
+  }
+}
+
+// wasn't sure how else to describe it
+@function getOppositeOfOpposite($color) {
+  @if (lightness($color) < 50) {
+    @return #000000;
+  } @else {
+    @return #ffffff;
+  }
+}

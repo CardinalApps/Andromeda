@@ -1,0 +1,115 @@
+system-menu {
+  margin-bottom: 12px;
+  display: flex;
+  position: relative;
+  z-index: 5000;
+  -webkit-app-region: no-drag !important;
+
+  ul.system-menu {
+    width: 100%;
+    padding: 0 13px;
+    display: flex;
+
+    .top-level-item {
+      position: relative;
+
+      &:hover {
+        background-color: var(--base-lighter-3);
+      }
+
+      &.open {
+        background-color: var(--base-lighter-3);
+
+        .second-level-menu {
+          display: block;
+        }
+      }
+
+      &:last-of-type {
+
+        // right-align last menu item to prevent overflow
+        .second-level-menu {
+          right: 0;
+          left: auto;
+        }
+      }
+
+      .sep {
+        margin: 5px 7px;
+        border-top: 1px solid var(--base-lighter-3);
+
+        &:hover { background: var(--base-darker-1); }
+      }
+
+      button {
+        margin: 1px 0 !important; // create space for outline
+        margin: 0;
+        padding: 0;
+        background: none;
+
+        &:focus {
+          box-shadow: none;
+          outline-color: var(--accent-color);
+          outline-width: 1px;
+          outline-style: solid;
+        }
+      }
+
+      .label {
+        padding: 6px 9px;
+        display: block;
+        cursor: pointer;
+        font: 600 12px var(--base-font);
+        color: var(--color-faded);
+        white-space: nowrap;
+      }
+
+      .second-level-menu {
+        min-width: 200px;
+        padding: 6px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: auto;
+        opacity: 1;
+        display: none;
+        background: var(--base-darker-1);
+
+        .second-level-item {
+          width: 100%;
+          cursor: pointer;
+
+          &:hover {
+            background: var(--base-lighter-2);
+          }
+
+          button {
+            width: 100%;
+            display: block;
+          }
+
+          span[tabindex="-1"] {
+            width: 100%;
+            padding: 6px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+          }
+
+          .label {
+            margin-right: 10px;
+            padding: 0;
+            color: var(--color-cream);
+          }
+          
+          .accelerator {
+            font: 11px var(--base-font);
+            color: var(--color-blend);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

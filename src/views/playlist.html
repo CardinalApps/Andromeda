@@ -1,0 +1,22 @@
+<!-- Associated model: playlist.js -->
+
+<div class="view-content has-fixed-header cover">
+  <!-- top header -->
+  <header>
+    <div class="location">
+      <p class="breadcrumbs">{i18n{breadcrumbs.music-library}} / {i18n{breadcrumbs.playlist}}</p>
+      <h1 title="{{name}}">{{playlist_name}}</h1>
+    </div>
+  </header>
+
+  <div id="single-playlist-layout">
+    <div class="playlist-meta">
+      <div class="play-now">
+        <play-button playlistid="{{id}}"></play-button>
+        <h3>{i18n{view.playlist.play-button-c2a}}</h3>
+      </div>
+    </div>
+
+    <track-list playlistid="{{id}}" titlei18nkey="view.playlist.tracks-in-playlist-title"></track-list>
+  </div>
+</div>

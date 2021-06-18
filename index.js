@@ -1,0 +1,1 @@
+console.log('You should be loading /src/index.html in a browser.')

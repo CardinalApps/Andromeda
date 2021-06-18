@@ -1,0 +1,93 @@
+<div class="settings-panel">
+    <form id="app-settings-form" method="post">
+
+    <div class="tabs" data-tab-row-title="{i18n{settings.main-title}}">
+      <!-- General settings -->
+      <div
+      class="tab"
+      data-tab-name="{i18n{settings.tab-name-general}}"
+      data-tab-slug="general"
+      data-tab-icon="home">
+
+        <div class="settings-pane">
+          <h2>{i18n{settings.tab-name-general}}</h2>
+
+          <!-- Language -->
+          {{settings-field/general/lang}}
+
+          <!-- Start page -->
+          {{settings-field/general/start-page}}
+
+          <!-- Updates -->
+          {{settings-field/general/updates}}
+
+          <p class="folder-structure-guide" data-modal="#folder-structure-guide-modal-content">
+            <i class="fas fa-info-circle"></i>
+            {i18n{settings.local-files.folder-structure-guide-opener}}
+          </p>
+
+          <div id="folder-structure-guide-modal-content" class="modal-content-element">
+            {inc{/elements/music-settings/templates/modals/folder-structure.html}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Playback settings -->
+      <div
+      class="tab"
+      data-tab-name="{i18n{settings.tab-name-music-playback}}"
+      data-tab-slug="playback"
+      data-tab-icon="headphones">
+
+        <div class="settings-pane">
+          <h2>{i18n{settings.tab-name-music-playback}}</h2>
+
+          <!-- Notifications -->
+          {inc{/elements/music-settings/templates/playback/notifications.html}}
+          
+          <!-- Playback flags -->
+          {inc{/elements/music-settings/templates/playback/flags.html}}
+        </div>
+      </div>
+
+      <!-- Theme settings -->
+      <div
+      class="tab"
+      data-tab-name="{i18n{settings.tab-name-theme}}"
+      data-tab-slug="theme"
+      data-tab-icon="palette">
+
+        <div class="settings-pane">
+          <h2>{i18n{settings.tab-name-theme}}</h2>
+          
+          <!-- Color theme -->
+          {{settings-field/theme/color-theme}}
+
+          <!-- Swatches -->
+          {{settings-field/theme/swatches}}
+
+          <!-- Custom CSS -->
+          {{settings-field/theme/custom-css}}
+        </div>
+      </div>
+
+      <div
+      class="tab"
+      data-tab-name="{i18n{settings.tab-name-advanced}}"
+      data-tab-slug="advanced"
+      data-tab-icon="dungeon">
+
+        <div class="settings-pane">
+          <h2>{i18n{settings.tab-name-general}}</h2>
+
+          <!-- Developer -->
+          {{settings-field/advanced/developer}}
+
+          <!-- Factory reset -->
+          {inc{/elements/music-settings/templates/advanced/factory-reset.html}}
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

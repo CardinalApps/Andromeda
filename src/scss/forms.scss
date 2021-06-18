@@ -1,0 +1,631 @@
+form {
+  width: 100%;
+
+  &.small {
+
+    .form-select {
+      .select-outer {
+
+        &:after {
+          width: 10px;
+          height: 10px;
+          padding: 0 0 0 5px;
+          font-size: 10px;
+          right: 3px;
+        }
+
+        select {
+          min-width: 75px;
+          padding: 4px 9px;
+          font-size: 10px;
+          border: none;
+        }
+      }
+    }
+  }
+
+  // squish the form
+  &.compact {
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    textarea {
+      height: 80px;
+      min-height: 0;
+      resize: none;
+    }
+
+    .form-select {
+      width: 100%;
+      display: flex;
+
+      select {
+        width: 100%;
+      }
+    }
+  }
+
+  // when loading
+  &.loading {
+
+    // show a loading indicator in the submit button
+    button[type="submit"] {
+      color: var(--base-darker-3);
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: {
+          repeat: no-repeat;
+          size: 16px;
+          position: center center;
+          image: url('../../images/loading.svg');
+        }
+      }
+    }
+  }
+
+  // in success state
+  &.success {
+    
+    // show a loading indicator in the submit button
+    button[type="submit"] {
+      color: var(--base-darker-3);
+    }
+  }
+
+  // when loading or in success state
+  &.loading,
+  &.success {
+
+    // cover the buttons to make them unclickable, simpler than doing it in js
+    .buttons:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+  }
+
+  /**
+   * .form-group
+   */
+  .form-group {
+    width: 100%;
+    margin-bottom: 50px;
+
+    &.half {
+      width: 50%;
+    }
+
+    .group-title {
+      font-size: 16px;
+      color: var(--color-opposite);
+    }
+
+    .instructions {
+
+      p {
+        margin-bottom: 5px;
+        font: 13px var(--base-font);
+        color: var(--color-faded);
+      }
+    }
+  }
+
+  /**
+   * .field
+   */
+  .field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .label-text {
+      margin-bottom: 7px;
+      font: 400 13px var(--base-font);
+      color: var(--color-cream);
+      display: flex;
+      align-items: center;
+    }
+
+    label {
+      width: 100%;
+    }
+  }
+
+  /**
+   * <label>
+   */
+   label {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.inline {
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .label-text {
+        margin: 0 10px 0 0;
+      }
+
+      input {
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+
+  /**
+   * Wraps the <select> for styling
+   */
+  .form-select {
+    position: relative;
+    display: inline-flex;
+
+    .select-outer {
+      width: 100%;
+      position: relative;
+
+      &:after {
+        width: 15px;
+        height: 16px;
+        padding: 5px 0 0 9px;
+        font-size: 12px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        pointer-events: none;
+        align-items: center;
+        color: var(--color-opposite);
+        border-left: 1px solid var(--base-lighter-1);
+        @include icon('\f0d7');
+      }
+    }
+  }
+
+  .form-multi-select {
+
+    .select-outer {
+      width: 100%;
+    }
+  }
+
+  /**
+   * Wraps image file pickers
+   */
+  .photo-input {
+    width: 100%;
+    position: relative;
+
+    button.remove-photo {
+      height: auto;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      i {
+        font-size: 14px;
+        color: var(--accent-color);
+      }
+    }
+    
+    input[type="file"] {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      opacity: 0;
+
+      &:focus ~ .thumb .btn {
+        @include active-outline();
+      }
+
+      &.albumart + .thumb {
+        padding-top: 100%;
+      }
+    }
+
+    label {
+      width: 100%;
+    }
+
+    .thumb {
+      width: 100%;
+      padding-top: 50%;
+      position: relative;
+      border-radius: var(--border-radius-small);
+      background: {
+        color: var(--base-darker-2);
+        repeat: no-repeat;
+        position: center center;
+        size: cover;
+      };
+  
+      &:before {
+        @include icon('\f03e');
+        font-size: 26px;
+        color: var(--color-blend);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &[style] {
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+
+    .btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+
+  /**
+   * <select>
+   */
+  select {
+    min-width: 175px;
+    padding: 6px 12px;
+    color: var(--color-opposite);
+    font-size: 14px;
+    border: 1px solid var(--color-blend);
+    border-radius: var(--border-radius-small);
+    background-color: var(--base-lighter-3);
+    -webkit-appearance: none;
+
+    &:focus {
+      @include active-outline();
+    }
+
+    &[multiple] {
+      width: 100%;
+      padding: 8px;
+      overflow: auto;
+      border: var(--defining-border);
+      background-color: var(--base-darker-2);
+
+      option {
+        color: white;
+        font: 300 14px var(--accent-font);
+        padding: 3px 6px;
+        border-radius: var(--border-radius-small);
+        margin-bottom: 2px;
+      }
+    }
+
+    option {
+      color: black;
+    }
+  }
+
+  /**
+   * Toggle switches
+   */
+  .toggle-switch-field {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    &.align-right {
+      justify-content: flex-end;
+
+      label {
+        order: 2;
+      }
+
+      .label-text { 
+        order: 1;
+        margin-right: 15px;
+      }
+
+      .toggle-switch {
+        margin: 0;
+      }
+    }
+
+    label {
+      width: 62px;
+      flex-shrink: 0;
+    }
+    
+    .label-text {
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    .explanation {
+      margin-right: 10px;
+      color: var(--color-faded);
+      font-size: 12px;
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  .toggle-switch {
+    width: 42px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    position: relative;
+    background: var(--base-darker-3);
+
+    .switch {
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      cursor: pointer;
+      border-radius: 100%;
+      background: var(--base-lighter-3);
+      transition: all 100ms;
+    }
+
+    // actual input must be "visible" to recieve focus when user tabs
+    input[type="checkbox"] {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      opacity: 0;
+
+      &:checked ~ .switch {
+        left: calc(100% - 17px - 5px);
+        background-color: var(--success);
+      }
+
+      &:focus ~ .focus,
+      &:active ~ .focus {
+        @include active-outline();
+      }
+    }
+
+    .focus {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px;
+    }
+  }
+
+  /**
+   * Date group. This is not an input with type date, this is 3 separate inputs for DD-MM-YYYY
+   */
+  .inline-fields {
+    display: flex;
+
+    .field {
+      margin-right: 25px;
+      display: block;
+    }
+
+    .inline-xs input {
+      width: 35px;
+    }
+
+    .inline-s input {
+      width: 50px;
+    }
+
+    .inline-m input {
+      width: 60px;
+    }
+
+    .inline-l input {
+      width: 80px;
+    }
+
+    input {
+      padding: 7px !important;
+      text-align: center;
+    }
+
+    .inline-field-sep-label {
+      margin: 23px 8px 0 0;
+      font: 400 14px var(--base-font);
+      color: var(--color-cream);
+      display: inline-flex;
+      align-items: center;
+      text-transform: lowercase;
+    }
+
+    // create some space
+    .sep-right .field {
+      margin-right: 25px;
+    }
+
+    // remove some space
+    .pull-right .field {
+      margin-right: 8px;
+    }
+
+    // gotta keep these aligned with adjacent fields that do have labels
+    .no-label {
+      margin-top: 26px;
+    }
+  }
+
+  /**
+   * <input type="text">
+   * <input type="search">
+   * <input type="password">
+   * <textarea>
+   */
+  input[type="text"],
+  input[type="number"],
+  input[type="search"],
+  input[type="password"],
+  textarea {
+    width: 100%;
+    height: 35px; // fixed height improves alignment
+    padding: 7px 12px;
+    color: var(--color-extreme);
+    font: 300 14px var(--accent-font);
+    cursor: text;
+    user-select: text;
+    border: var(--defining-border);
+    border-radius: var(--border-radius-small);
+    background: var(--base-darker-2);
+
+    &:focus {
+      @include active-outline();
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+  }
+
+  /**
+   * <textarea>
+   */
+  textarea {
+    min-height: 160px;
+    max-width: 100%;
+    width: 420px;
+  }
+
+  /**
+   * Buttons
+   */
+  .buttons {
+    position: relative;
+  }
+
+  button[type="button"],
+  button[type="submit"],
+  button[type="reset"],
+  .btn {
+    @extend button;
+    height: 35px; // fixed height improves alignment with form fields
+    position: relative;
+  }
+
+  /**
+   * Errors
+   */
+  .validation-error {
+    
+    input[type="text"],
+    input[type="search"],
+    input[type="password"] {
+      background-color: var(--danger-bg);
+    }
+  }
+
+  .submission-error {
+    margin-bottom: 20px;
+    text-align: center;
+    font: 600 14px var(--base-font);
+    color: var(--danger);
+  }
+
+  .swatches {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .field {
+      width: auto;
+      margin: 0 5px 5px 0;
+    }
+
+    .clicks {
+      width: 33px;
+      height: 33px;
+      padding: 0;
+      cursor: pointer;
+      @include pop();
+
+      &.active {
+        box-shadow: 0 0 3px 3px var(--accent-color);
+      }
+
+      input[type="radio"] {
+        width: 1px;
+        height: 1px;
+        position: fixed;
+        top: auto;
+        left: -9999px;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+// https://codepen.io/kuvinod5/pen/WNvzazr
+.checkmark {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  stroke-width: 2;
+  stroke: #4bb71b;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #4bb71b;
+  animation: checkmark-fill .2s ease-in-out .2s forwards, scale 150ms ease-in-out 450ms both;
+}
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #4bb71b;
+  animation: checkmark-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: white;
+  stroke-width: 7px;
+  animation: checkmark-stroke 0.15s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+}
+@keyframes checkmark-stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes checkmark-scale {
+  0%, 100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes checkmark-fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4bb71b;
+  }
+}

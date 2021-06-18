@@ -1,0 +1,30 @@
+<form id="album-metadata" class="compact">
+  {inc{/elements/metadata-editor/forms/includes/header.html}}
+
+  <!-- title -->
+  <div class="form-group">
+    <input class="req use-as-subtitle" type="text" name="release_title" value="{{release_title}}" data-label="{i18n{column.release_title}}">
+  </div>
+
+  <!-- artist -->
+  <!-- user will enter a string as the "ID". the main process will handle
+  converting that string to a new artist or not -->
+  <div class="form-group">
+    <input class="req" type="text" name="album_artist_id" value="{{artist_name}}" data-label="{i18n{column.artist_name}}">
+  </div>
+
+  <!-- year -->
+  <div class="form-group inline-fields">
+    <div class="field inline-s">
+      <input type="number" name="release_year" maxlength="4" min="0" max="9999" value="{{release_year}}" data-label="{i18n{column.release_year}}">
+    </div>
+  </div>
+
+  <!-- artwork -->
+  <div class="form-group">
+    <input type="file" class="albumart" name="album_artwork" accept="image/*" data-value="{{artworkPath}}" data-label="{i18n{column.album_artwork}}">
+  </div>
+
+  <!-- controls -->
+  {inc{/elements/metadata-editor/forms/includes/controls.html}}
+</form>

@@ -1,0 +1,19 @@
+//
+// <search-bar>
+//
+search-bar {
+  width: 100%;
+  display: block;
+
+  .input-outer {
+    position: relative;
+
+    &:after {
+      @include icon('\f002');
+      position: absolute;
+      top: 9px;
+      right: 15px;
+      color: var(--color-blend);
+    }
+  }
+}

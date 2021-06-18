@@ -1,0 +1,77 @@
+release-metadata {
+  width: 100%;
+  display: block;
+
+  .art {
+    padding-top: 100%;
+    margin-bottom: 20px;
+    @include pop();
+    background:  {
+      size: contain;
+      position: center center;
+      repeat: no-repeat;
+    };
+  }
+
+  .controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    play-button, p {
+      margin: 0 5px;
+    }
+
+    p {
+      color: var(--color-opposite);
+      font: 500 22px var(--accent-font);
+      position: relative;
+      top: 1px;
+      letter-spacing: 0.03em;
+    }
+  }
+
+  .genres {
+    text-align: center;
+
+    genre-tag {
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+  }
+
+  .metadata {
+    max-width: 240px;
+    padding: 0 20px;
+    margin: 0 auto;
+
+    li {
+      width: 100%;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      font: 13px var(--base-font);
+      color: var(--color-cream);
+    }
+
+    .label {
+      font-weight: 600;
+      padding-right: 10px;
+    }
+
+    .value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        color: var(--color-cream);
+
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+}

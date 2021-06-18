@@ -1,0 +1,139 @@
+/**
+ * Echoes is designed for macOS by default.
+ * This file provides overrides for win32, and custom Wndows components.
+ */
+
+ $win32-red: #d62e27;
+ $window-controls-width: 125px;
+
+/**
+ * General overrides
+ */
+music-app[os="win32"] {
+
+  .win32-only {
+    display: block;
+
+    &.inline {
+      display: inline;
+    }
+  }
+
+  .darwin-only {
+    display: none;
+  }
+
+  #top-grab {
+    //width: calc(100% - #{$window-controls-width});
+    width: var(--nav-pillar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  system-menu {
+
+    .label {
+      font-family: 'Segoe UI', Arial, sans-serif !important;
+    }
+  }
+
+  #nav-pillar {
+    padding-top: 20px;
+    -webkit-app-region: no-drag;
+  }
+
+  #queue-pillar {
+    top: 33px;
+    border-top: var(--defining-border);
+  }
+
+  select {
+    border-radius: var(--border-radius-small);
+
+    option {
+      color: var(--color-extreme);
+    }
+  }
+}
+
+/**
+ * Minimize, maximize, close, at the top right of the app
+ */
+#win32-window-controls {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--nav-pillar-width);
+  z-index: 500;
+  display: flex;
+  justify-content: flex-end;
+
+  .grab-col {
+    height: 22px;
+    flex-grow: 1;
+    -webkit-app-region: drag;
+  }
+
+  .buttons {
+    width: 125px;
+    height: 32px;
+    display: flex;
+    position: relative;
+    z-index: 5000;
+
+    // all buttons
+    > div {
+      width: 33.3333%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: var(--base-lighter-1);
+      }
+
+      i {
+        color: var(--color-faded);
+        font-size: 12px;
+      }
+    }
+
+    .restore {
+      display: none;
+    }
+
+    // overrides for the minimize button
+    .minimize {
+
+      i {
+        position: relative;
+        top: -2px;
+      }
+    }
+
+    // overrides for the close button
+    .close {
+      color: var(--color-faded);
+
+      &:hover {
+        background: $win32-red;
+
+        i {
+          color: white;
+        }
+      }
+
+      i {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+music-app.maximized {
+  #win32-window-controls .restore { display: flex; }
+  #win32-window-controls .maximize { display: none; }
+}

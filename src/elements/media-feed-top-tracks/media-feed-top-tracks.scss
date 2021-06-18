@@ -1,0 +1,9 @@
+media-feed-top-tracks {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  track-block:nth-of-type(3n) {
+    margin-bottom: 0;
+  }
+}

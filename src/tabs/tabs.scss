@@ -1,0 +1,15 @@
+.tabs {
+  display: none;
+
+  &.ready {
+    display: block;
+  }
+}
+
+.tab {
+  display: none;
+
+  &.active {
+    display: flex;
+  }
+}

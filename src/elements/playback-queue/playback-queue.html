@@ -1,0 +1,23 @@
+<header>
+  <h2 class="when-normal">{i18n{queue.title}}</h2>
+  <h2 class="when-shuffling">{i18n{queue.shuffling-title}}</h2>
+
+  <div class="right">
+    <div class="controls">
+      <button class="clear">
+        <i class="fas fa-ban" tabindex="-1"></i>
+      </button>
+    </div>
+    
+    <div class="summary">
+      <span class="num-tracks"></span>
+      <span class="queue-duration"></span>
+    </div>
+  </div>
+</header>
+
+<ol class="queue"></ol>
+
+<div class="empty">
+  {i18n{queue.empty-message}}
+</div>

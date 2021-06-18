@@ -1,0 +1,150 @@
+@import './reset.scss';
+@import './fonts.scss';
+@import './functions.scss';
+@import './mixins.scss';
+
+/**
+ * Base CSS vars
+ */
+:root {
+  // fonts
+  --base-font: 'Open Sans';
+  --accent-font: 'Yantramanav';
+
+  // provide an accent color even though the music-app will inject the database one
+  --accent-color: #a174dd;
+
+  // colors shared by both light/dark
+  --almost-black: #080808;
+
+  // border radii
+  --border-radius-extra-small: 2px;
+  --border-radius-small: 4px;
+  --border-radius-large: 30px;
+
+  // animations
+  --dragndrop-transition-speed: 100ms;
+
+  // other common units
+  --letter-spacing: 0.05em;
+  --focus-space: 8px; // the minimum amounce of space needed around elements that are focusable
+  --top-grab-height: 23px;
+  --nav-pillar-width: 230px;
+  --right-pillar-width: 280px;
+  --playback-controls-height: 80px;
+  --view-header-height: 100px;
+
+  // space from the edges for floating modals
+  --floating-top-space: 40px;
+  --floating-left-space: 30px;
+  --floating-right-space: 40px;
+  // cant use calc() unfortunately because this var is needed in JS
+  --floating-bottom-space: 100px; // going for this formula: calc(var(--playback-controls-height) + 20px)
+}
+
+/**
+ * Dark mode vars
+ */
+music-app[color-theme="dark"] {
+  --base-color: #272727;
+
+  // shades darker and lighter, used for background and borders
+  --base-darker-1: #222222;
+  --base-darker-2: #1d1d1d;
+  --base-darker-3: #151515;
+  --base-lighter-1: #2f2f2f;
+  --base-lighter-2: #363636;
+  --base-lighter-3: #3e3e3e;
+
+  // text colors
+  --color-slab: #000000; // base color, completley saturated
+  --color-blend: #4d4d4d; // text is very subtle on base color
+  --color-faded: #747474; // a little less subtle
+  --color-cream: #a7a7a7; // somewhere in between, good readability
+  --color-egg: #dadada; // brighter...
+  --color-opposite: #d8d8d8; // contrasts with base for striking readibility 
+  --color-extreme: #ffffff; // extreme contrast (100% black or white)
+
+  // status indicators
+  --success: #3aaf39; // text/borders
+  --warning: yellow; // text/borders
+  --danger: #d24848; // text/borders
+  --success-bg: #3a703a; // backgrounds
+  --warning-bg: #efbe34; // backgrounds
+  --danger-bg: #a53737; // backgrounds
+
+  // shadows and borders
+  --defining-border: 1px solid #151515;
+  --box-shadow: 0 2px 2px 1px #0e0e0e;
+  --box-shadow-large: 0 0 6px 2px rgba(0,0,0, 0.3);
+
+  // gradients
+  --gradient: linear-gradient(45deg, var(--base-darker-3) 0%, var(--base-darker-1) 100%);
+  --gradient-2: linear-gradient(45deg, var(--base-darker-3) 0%, var(--base-lighter-1) 110%);
+  --gradient-accent: linear-gradient(45deg, var(--base-darker-2) 10%, var(--accent-color) 2300%);
+  --part-transparent-gradient: linear-gradient(0deg, rgba(0,0,0, 0.55) 17%, rgba(0,0,0, 0.2));
+  
+  // other
+  --empty-message-color: rgba(90, 90, 90, 0.8);
+  --scrollbar-color: #0e0e0e;
+}
+
+// general
+@import './general.scss';
+@import './animate.scss';
+@import './forms.scss';
+@import './win32.scss';
+@import './modals.scss';
+
+// components
+@import '../elements/music-app/music-app.scss';
+@import '../elements/context-menu/context-menu.scss';
+@import '../elements/music-settings/music-settings.scss';
+@import '../elements/dot-menu/dot-menu.scss';
+@import '../elements/search-bar/search-bar.scss';
+@import '../elements/playback-controls/playback-controls.scss';
+@import '../elements/playback-queue/playback-queue.scss';
+@import '../elements/play-button/play-button.scss';
+@import '../elements/genre-tag/genre-tag.scss';
+@import '../elements/genre-tags/genre-tags.scss';
+@import '../elements/album-grid/album-grid.scss';
+@import '../elements/artist-grid/artist-grid.scss';
+@import '../elements/track-table/track-table.scss';
+@import '../elements/track-list/track-list.scss';
+@import '../elements/playlist-list/playlist-list.scss';
+@import '../elements/album-block/album-block.scss';
+@import '../elements/release-metadata/release-metadata.scss';
+@import '../elements/artist-block/artist-block.scss';
+@import '../elements/track-block/track-block.scss';
+@import '../elements/playlist-block/playlist-block.scss';
+@import '../elements/media-feed/media-feed.scss';
+@import '../elements/system-menu/system-menu.scss';
+@import '../elements/control-group/control-group.scss';
+@import '../elements/album-slider/album-slider.scss';
+@import '../elements/track-slider/track-slider.scss';
+@import '../elements/media-feed-top-albums/media-feed-top-albums.scss';
+@import '../elements/media-feed-top-tracks/media-feed-top-tracks.scss';
+@import '../elements/media-feed-shuffle-music/media-feed-shuffle-music.scss';
+@import '../elements/media-feed-recently-played-albums/media-feed-recently-played-albums.scss';
+@import '../elements/media-feed-recently-added-albums/media-feed-recently-added-albums.scss';
+@import '../elements/media-feed-albums-with-favorites/media-feed-albums-with-favorites.scss';
+@import '../elements/media-feed-artist/media-feed-artist.scss';
+@import '../elements/server-connect/server-connect.scss';
+
+// views
+@import './view-albums.scss';
+@import './view-album.scss';
+@import './view-artists.scss';
+@import './view-artist.scss';
+@import './view-playlist.scss';
+@import './view-media-feed.scss';
+
+// utils
+@import '../tabs/tabs.scss';
+@import '../tooltip/tooltip.scss';
+
+// light theme
+@import './light-theme.scss';
+
+// external lib CSS
+@import '../_external/swiper/swiper.scss';

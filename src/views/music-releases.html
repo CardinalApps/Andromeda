@@ -1,0 +1,19 @@
+<div id="album-archive-layout" class="view-content has-fixed-header">
+  <header>
+    <div class="location beside-control-group">
+      <p class="breadcrumbs">{i18n{breadcrumbs.music-library}}</p>
+      <h1 title="{i18n{view.albums.title}}">{i18n{view.albums.title}}</h1>
+    </div>
+    
+    <control-group
+      aria-label="{i18n{aria.label.albums.controls.order-by}}"
+      aria-controls="album-view-grid"
+      for="#album-view-grid"
+      items='{inc{/elements/album-grid/grid-controls.json}}'>
+    </control-group>
+  </header>
+
+  <div class="album-grid-outer">
+    <album-grid id="album-view-grid" ids="*" size="full"></album-grid>
+  </div>
+</div>

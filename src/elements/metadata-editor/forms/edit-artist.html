@@ -1,0 +1,21 @@
+<form id="artist-metadata" class="compact">
+  {inc{/elements/metadata-editor/forms/includes/header.html}}
+
+  <!-- photo -->
+  <div class="form-group">
+    <input type="file" name="artist_photo" accept="image/*" data-value="{{artworkPath}}" data-label="{i18n{column.artist_photo}}">
+  </div>
+
+  <!-- name -->
+  <div class="form-group">
+    <input class="req use-as-subtitle" type="text" name="artist_name" value="{{artist_name}}" data-label="{i18n{column.artist_name}}">
+  </div>
+
+  <!-- bio -->
+  <div class="form-group">
+    <textarea name="artist_bio" data-label="{i18n{column.artist_bio}}">{{artist_bio}}</textarea>
+  </div>
+
+  <!-- controls -->
+  {inc{/elements/metadata-editor/forms/includes/controls.html}}
+</form>

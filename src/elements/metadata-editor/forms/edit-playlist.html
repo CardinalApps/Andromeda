@@ -1,0 +1,16 @@
+<form id="playlist-metadata" class="compact">
+  {inc{/elements/metadata-editor/forms/includes/header.html}}
+
+  <!-- name -->
+  <div class="form-group">
+    <input class="req use-as-subtitle" type="text" name="playlist_name" value="{{playlist_name}}" data-label="{i18n{column.playlist_name}}">
+  </div>
+
+  <!-- tags -->
+  <div class="form-group">
+    <textarea name="playlist_tags" data-label="{i18n{column.playlist_tags}}">{{playlist_tags}}</textarea>
+  </div>
+
+  <!-- controls -->
+  {inc{/elements/metadata-editor/forms/includes/controls.html}}
+</form>

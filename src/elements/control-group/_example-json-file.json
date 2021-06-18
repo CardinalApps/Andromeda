@@ -1,0 +1,37 @@
+[
+  {
+    "__COMMENT__0": "Copy and modify this JSON file into other custom elements for implementing control groups.",
+    "__COMMENT__1": "The <control-group> element renders itself into two 'types' of controls:",
+    "__COMMENT__2": "     - 'buttons': a group of textual buttons, each of which has an on/off state. Only one button in the group may be active at a time.",
+    "__COMMENT__3": "     - 'cycle-button': a floating icon, which when clicked, cycles through a series of states, each state having an icon and a value.",
+    "__COMMENT__4": "The 'group' key specifies the slug of the group, and it's inserted directly into the controlled elements as attributes.",
+    "__COMMENT__5": "Cycle buttons may control multiple attributes per cycle",
+
+    "type": "buttons",
+    "label": "{i18n{view.albums.control-group.order.title}}",
+    "group": "orderby",
+    "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.order.aria-assertive-change-message}}",
+    "buttons": {
+      "name": "{i18n{view.albums.control-group.order.option.name}}",
+      "year": "{i18n{view.albums.control-group.order.option.year}}"
+    }
+  },
+  {
+    "type": "cycle-button",
+    "title": "{i18n{control-group.cycle-button.name-asc-desc}}",
+    "cycle": [
+      { 
+        "values": {"order": "desc", "orderby": "name"},
+        "icon": "sort-alpha-up",
+        "name": "{i18n{view.albums.control-group.orderby.desc}}",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.orderby.aria-assertive-change-message}}"
+      },
+      {
+        "values": {"order": "asc", "orderby": "name"},
+        "icon": "sort-alpha-down",
+        "name": "{i18n{view.albums.control-group.orderby.asc}}",
+        "ariaAssertiveChangeMessage": "{i18n{view.albums.control-group.orderby.aria-assertive-change-message}}"
+      }
+    ]
+  }
+]

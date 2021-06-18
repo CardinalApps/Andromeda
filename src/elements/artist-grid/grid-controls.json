@@ -1,0 +1,18 @@
+[
+  {
+    "type": "cycle-button",
+    "title": "{i18n{control-group.cycle-button.name-asc-desc}}",
+    "cycle": [
+      { 
+        "values": {"order": "desc", "orderby": "artist_name"},
+        "icon": "sort-alpha-up",
+        "ariaAssertiveChangeMessage": "{i18n{view.artists.control-group.name-desc.aria-assertive-change-message}}"
+      },
+      {
+        "values": {"order": "asc", "orderby": "artist_name"},
+        "icon": "sort-alpha-down",
+        "ariaAssertiveChangeMessage": "{i18n{view.artists.control-group.name-asc.aria-assertive-change-message}}"
+      }
+    ]
+  }
+]

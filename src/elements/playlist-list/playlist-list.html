@@ -1,0 +1,30 @@
+<div class="common-message empty-message">
+  <span>
+    <i class="fas fa-running"></i>
+    {i18n{playlist-list.empty-message}}
+  </span>
+</div>
+
+<div class="controls">
+  <form id="create-playlist">
+
+    <button class="circle-button clicks" name="show-fields" type="button" title="{i18n{playlist-list.form.create.button-title}}">
+      <span tabindex="-1">
+         <i class="fas fa-plus"></i>
+         <i class="fas fa-minus"></i>
+      </span>
+    </button>
+
+    <div class="hidden-fields">
+      <label class="field inline">
+        <span class="label-text">{i18n{playlist-list.form.create.name-label}}</span>
+        <input type="text" name="new-playlist-name" maxlength="500">
+      </label>
+      
+      <button type="submit" class="clicks">{i18n{playlist-list.form.create.submit-button}}</button>
+    </div>
+      
+  </form>
+</div>
+
+<div class="playlists"></div>

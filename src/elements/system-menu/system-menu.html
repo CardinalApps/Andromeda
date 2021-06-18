@@ -1,0 +1,26 @@
+<template class="top-level-item">
+  <li class="top-level-item" data-transfer-focus-to=".second-level-item button" data-transfer-focus-to-child="true">
+    <button type="button">
+      <span class="label" tabindex="-1"></span>
+    </button>
+    
+    <ul class="second-level-menu"></ul>
+  </li>
+</template>
+
+<template class="second-level-item">
+  <li class="second-level-item">
+    <button type="button">
+      <span tabindex="-1">
+        <span class="label"></span>
+        <span class="accelerator"></span>
+      </span>
+    </button>
+  </li>
+</template>
+
+<template class="sep">
+  <li class="sep"></li>
+</template>
+
+<ul class="system-menu"></ul>

@@ -1,0 +1,181 @@
+<!-- app-frame -->
+<section id="app-frame">
+  <!-- system menu and minimize/maximize/restore/close on win32 -->
+  <div id="win32-window-controls" class="win32-only">
+    <div class="grab-col"></div>
+    <system-menu type="win32"></system-menu>
+    {inc{/elements/music-app/templates/win32-window-control-buttons.html}}
+  </div>
+  
+  <!-- #pillars -->
+  <section id="pillars">
+    <!-- <section id="pillars" class="right-pillar-open"> -->
+
+    <!-- nav pillar -->
+    <section id="nav-pillar">
+      <div class="nav-top">
+        <header>
+          <div id="logo">
+            <a href="/explore-music" id="logo" class="router-link">
+              <span tabindex="-1">
+                <img src="images/logotype-light.svg" alt="{i18n{app-name}}">
+              </span>
+            </a>
+          </div>
+          
+          <dot-menu id="main-dot-menu" class="large slim standalone"></dot-menu>
+        </header>
+
+        <div id="main-search">
+          <search-bar></search-bar>
+        </div>
+
+        <div class="menus">
+          <!-- Music -->
+          <nav id="music-nav">
+            <h5 class="nav-title">{i18n{nav.music.title}}</h5>
+            <ul>
+              <li class="large">
+                <a href="/explore-music" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-music"></i>
+                    {i18n{nav.music.explore}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/artists" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-microphone-alt"></i>
+                    {i18n{nav.music.artists}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/music-releases" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-compact-disc"></i>
+                    {i18n{nav.music.releases}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/tracks" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-file-audio"></i>
+                    {i18n{nav.music.tracks}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/playlists" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-list-alt"></i>
+                    {i18n{nav.music.playlists}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/music-genres" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-cube"></i>
+                    {i18n{nav.music.genres}}
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="favorite-genres"></div>
+          </nav>
+
+          <!-- Cinema -->
+          <!-- <nav id="cinema-nav">
+            <h5 class="nav-title">{i18n{nav.cinema.title}}</h5>
+            <ul>
+              <li class="large">
+                <a href="/home-cinema" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-couch"></i>
+                    {i18n{nav.cinema.home-cinema}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/tv" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-tv"></i>
+                    {i18n{nav.cinema.tv}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/movies" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-film"></i>
+                    {i18n{nav.cinema.movies}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/channels" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-stream"></i>
+                    {i18n{nav.cinema.channels}}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/cinema-genres" class="router-link">
+                  <span tabindex="-1">
+                    <i class="fas fa-theater-masks"></i>
+                    {i18n{nav.cinema.genres}}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav> -->
+        </div>
+
+        <!-- will show results as the user types -->
+        <div id="search-typing-results"></div>
+      </div>
+
+      <div class="nav-bottom">
+        <div id="theme-notifications"></div>
+      </div>
+    </section>
+
+    <!-- center pillar -->
+    <section id="view-pillar">
+      <div id="top-grab" class="grab"></div>
+
+      <!-- back button -->
+      <button id="back-button" class="control-button clicks">
+        <span tabindex="-1">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
+
+      <!-- all views get injected as direct child of #view, and each brings their own .view-content element -->
+      <main id="view"></main>
+
+      <!-- only shown when there's no music -->
+      <div class="empty-message common-message">
+        <span data-settings="media">
+          <i class="fas fa-headphones-alt"></i>
+          {i18n{view.empty-message}}
+        </span>
+      </div>
+
+      <playback-controls class="stopped"></playback-controls>
+    </section>
+
+    <!-- queue pillar -->
+    <section id="queue-pillar">
+      <playback-queue></playback-queue>
+    </section>
+  </section>
+
+  <!-- the settings always exists in the background -->
+  <music-settings></music-settings>
+</section>
