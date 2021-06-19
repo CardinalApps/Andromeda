@@ -1,7 +1,7 @@
 {
   "name": "andromeda",
-  "description": "Andromeda is the theme for the music app.",
-  "version": "0.1.0",
+  "description": "Andromeda is the UI for Cardinal Music.",
+  "version": "0.2.0",
   "author": "somebeaver",
   "private": true,
   "dependencies": {

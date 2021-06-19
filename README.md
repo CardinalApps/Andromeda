@@ -1,7 +1,6 @@
 # Andromeda
 
-Andromeda is the name of the PWA (Progressive Web App) that is the Cardinal
-Music UI.
+Andromeda is the name of the Progressive Web App that is the Cardinal Music UI.
 
 Cardinal Server includes this PWA with its releases, and serves it at the
 `/music` endpoint.

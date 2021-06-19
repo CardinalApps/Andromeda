@@ -1,1 +1,1 @@
-console.log('You should be loading /src/index.html in a browser.')
+console.log('You should be serving /src/index.html to browsers.')
