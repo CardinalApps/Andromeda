@@ -67,6 +67,13 @@ export class MusicApp extends AppBase {
     this.registerEventHandlers()
 
     if (await this.autoConnectOrLock()) {
+      // is this the best place for this?
+        // with the vanilla env, we can't even load
+        // the app without the connection in the http first place, so it's safe to use
+        // http for getting the strings.
+        // with the electron env, there's the possibility of no http connection,
+        // so we gotta get the strings earlier via ipc instead of here.
+        await this.maybeSetI18nViaHttp()
       this.innerHTML = await html('/elements/music-app/music-app.html')
     }
   }
@@ -143,7 +150,7 @@ export class MusicApp extends AppBase {
     //this.maybeShowWelcome()
 
     // TODO delegate this to a <genre-list> element that filters by favs
-    this.injectFavoriteGenres()
+    //this.injectFavoriteGenres()
 
     Bridge.wsListen('server-to-client-instruction', (message) => {
       // let the server control this client's playback
@@ -192,7 +199,7 @@ export class MusicApp extends AppBase {
       }
     }]
 
-    if (__(this).hasClass('developer-mode')) {
+    if (__(this).hasClass('developer-mode') && this.getAttribute('env') === 'electron') {
       items.push({
         'group': 'Developer',
         'items': {
@@ -230,32 +237,36 @@ export class MusicApp extends AppBase {
    * Adds entries to the main dot menu.
    */
   setMainDotMenuItems() {
-    __('#main-dot-menu').el().addMenuItems('start', {
-      'group': i18n('app-name'),
-      'items': {
-        /**
-         * Check for updates
-         */
-        [i18n('system-menu.check-for-updates')]: {
-          'icon': 'parachute-box',
-          'cb': (rightClickedEl, menuItem) => {
-            if (__('#app').attr('env') !== 'electron') return console.warn('Updating only supported in Electron')
-            
-            Bridge.ipcSay('check-for-updates-and-prompt')
-            ContextMenu.closeAllContextMenus()
+    if (this.getAttribute('env') === 'electron') {
+      __('#main-dot-menu').el().addMenuItems('start', {
+        'group': i18n('app-name'),
+        'items': {
+          /**
+           * Check for updates
+           */
+          [i18n('system-menu.check-for-updates')]: {
+            'icon': 'parachute-box',
+            'cb': (rightClickedEl, menuItem) => {
+              if (__('#app').attr('env') !== 'electron') return console.warn('Updating only supported in Electron')
+              
+              Bridge.ipcSay('check-for-updates-and-prompt')
+              ContextMenu.closeAllContextMenus()
+            }
           }
         }
-      }
-    })
+      })
+    }
   }
 
   /**
    * Tells the main process to try and register listeners for media keys. If they cannot
    * be registered (which is often the case), a theme level notification will be displayed
    * to the user that prompts them to address the issue.
+   * 
+   * Requires Electron.
    */
   async registerMediaKeyListeners() {
-    if (__('#app').attr('env') !== 'electron') return true
+    if (this.getAttribute('env') !== 'electron') return true
     
     let mediaKeysAreRegistered = await Bridge.ipcAsk('register-media-key-listeners')
 
@@ -313,20 +324,20 @@ export class MusicApp extends AppBase {
    * 
    * @param {array} [genres] - Optionally give genre ID's to render instead of looking them up.
    */
-  async injectFavoriteGenres(favoriteGenres = []) {
-    if (!favoriteGenres.length) {
-      favoriteGenres = await Bridge.ipcAsk('get-option', 'favorite_genres')
-    }
+  // async injectFavoriteGenres(favoriteGenres = []) {
+  //   if (!favoriteGenres.length) {
+  //     favoriteGenres = await Bridge.ipcAsk('get-option', 'favorite_genres')
+  //   }
 
-    if (Array.isArray(favoriteGenres)) {
-      let favoriteGenresEl = __(this).find('.favorite-genres')
-      favoriteGenresEl.html('')
+  //   if (Array.isArray(favoriteGenres)) {
+  //     let favoriteGenresEl = __(this).find('.favorite-genres')
+  //     favoriteGenresEl.html('')
 
-      for (let genreId of favoriteGenres) {
-        favoriteGenresEl.appendHtml(/*html*/`<genre-tag genreid="${genreId}" small></genre-tag>`)
-      }
-    }
-  }
+  //     for (let genreId of favoriteGenres) {
+  //       favoriteGenresEl.appendHtml(/*html*/`<genre-tag genreid="${genreId}" small></genre-tag>`)
+  //     }
+  //   }
+  // }
 
   // /**
   //  * Checks the database 'show_welcome' option and shows the welcome modal if needed.
@@ -363,6 +374,8 @@ export class MusicApp extends AppBase {
    * Shows the about modal.
    */
   async showAbout() {
+    if (this.getAttribute('env') !== 'electron') return false
+
     let appPackage = await Bridge.ipcAsk('get-app-package')
 
     let replacements = {
@@ -383,7 +396,7 @@ export class MusicApp extends AppBase {
   sendStateToServer() {
     let reportedTime = Player.getCurrentPlaybackTime()
     let timeSeconds = __('playback-controls .current').attr('data-seconds') // ugly, but is related to bug below
-    let timeFormatted = __('playback-controls .current').el().innerText // ugly, but is related to bug below
+    let timeFormatted = Player.state === 'stopped' ? '0:00' : __('playback-controls .current').el().innerText // ugly, but is related to bug below
 
     // FIXME
     // https://github.com/thangngoc89/react-howler/issues/72

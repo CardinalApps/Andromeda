@@ -28,7 +28,7 @@ export class ArtistGrid extends Lowrider {
     this.resizeTimout = null
 
     // @listens new-artist
-    Bridge.ipcListen('new-artist', this.boundArtistListener)
+    //Bridge.ipcListen('new-artist', this.boundArtistListener)
 
     this.registerEventListeners()
 
@@ -100,7 +100,7 @@ export class ArtistGrid extends Lowrider {
     // this block may have not rendered
     if (__(this).hasClass('no-artists')) return
 
-    Bridge.removeListener('new-artist', this.boundArtistListener)
+    //Bridge.removeListener('new-artist', this.boundArtistListener)
     window.removeEventListener('resize', this.boundWindowResizeListener)
   }
 

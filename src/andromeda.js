@@ -1,21 +1,17 @@
 /**
- * @file
+ * Andromeda is the Cardinal Music web app. It depends on a connection to
+ * Cardinal Server.
  *
- * Andromeda is the package name of the Hydra desktop app theme. It sets up the
- * UI environment, inits a few necessary globals, then injects the appropiate
- * app into the DOM (music-app, photos-app, etc). All app types are designed to
- * run within the Andromeda envrionment, and depend on certain globals to exist
- * (namely the Router, Bridge, Player, ContextMenu, and i18n globals).
+ * This file will bootstrap the client env then inject the required element(s)
+ * into the DOM to load the app.
  *
- * When running in Electron, Andromeda takes advantage of the additional
- * capabilties that Electron provides, such as listening for keyboard media
- * keys, which can't easily happen on the web.
+ * When running in Electron, Andromeda will also establish an IPC connection to
+ * the main process.
  */
 import __ from '../node_modules/double-u/index.js'
 import { Bridge } from '../node_modules/bridge.js/index.js'
 import { Router } from '../node_modules/router.js/index.js'
 import Boogietime from '../node_modules/boogietime.js/index.js'
-import { getJSONFromFile } from '../node_modules/html.js/index.js'
 
 /**
  * Register all the custom elements, they automatically register with the browser.
@@ -24,27 +20,21 @@ import './elements/index.js'
 
 /**
  * Import app models that will be given to the router.
- * 
- * TODO Remove this, the idea didn't pan out. Convert view-models into Lowrider components.
  */
 import models from './models/index.js'
 
 /**
- * Wish there was top level await...
+ * Async function for await support.
  */
 async function initTheme() {
-  // init Bridge singleton. the AppBase component will establish the connections
+  // init Bridge singleton
   window.Bridge = new Bridge()
 
-  // try to connect to the Electron main process via IPC
-  await window.Bridge.init('ipc')
-  let env
-  
-  if (window.Bridge.ipcConnectionEstablished) {
-    env = 'electron'
-  } else {
-    env = 'vanilla'
-  }
+  // try to connect to the Electron main process. if we cannot, we must be
+  // running in a regular web browser. this is a more robust way of determining
+  // the env than parsing the agent string.
+  const ipcConnected = await window.Bridge.init('ipc')
+  const env = ipcConnected ? 'electron' : 'web'
 
   // init app audio player
   window.Player = new Boogietime({
@@ -52,9 +42,8 @@ async function initTheme() {
     'mode': 'stream'
   })
   
-  // init Router singleton. english is hardcoded here as a fallback. the main
-  // app-base will check for a user-selected lang during its startup, and set it
-  // if needed.
+  // init router. english is hardcoded here as a fallback. the app will check
+  // for a user selected lang during startup and change it if needed.
   window.Router = new Router({
     'root': '#view',
     'mode': 'electron',
@@ -62,23 +51,92 @@ async function initTheme() {
     'defaultLang': 'en',
     'cacheViews': true,
     'currentLang': 'en',
-    'routes': await getJSONFromFile('/routes.json'),
-    'models': models
+    'models': models,
+    'routes': [
+      {
+        "route": "/explore-music",
+        "view": "explore-music.html"
+      },
+      {
+        "route": "/search",
+        "view": "search.html"
+      },
+      {
+        "route": "/playlists",
+        "view": "playlists.html"
+      },
+      {
+        "route": "/playlist/:id",
+        "view": "playlist.html",
+        "model": "playlist",
+        "parent": "/playlists"
+      },
+      {
+        "route": "/artists",
+        "view": "artists.html"
+      },
+      {
+        "route": "/artist/:id",
+        "view": "artist.html",
+        "model": "artist",
+        "parent": "/artists"
+      },
+      {
+        "route": "/music-releases",
+        "view": "music-releases.html"
+      },
+      {
+        "route": "/music-release/:id",
+        "view": "music-release.html",
+        "model": "music-release",
+        "parent": "/music-releases"
+      },
+      {
+        "route": "/tracks",
+        "view": "tracks.html"
+      },
+      {
+        "route": "/music-genres",
+        "view": "music-genres.html"
+      },
+      {
+        "route": "/music-genre/:id",
+        "view": "music-genre.html",
+        "model": "music-genre",
+        "parent": "/music-genres"
+      },
+      {
+        "route": "/home-cinema",
+        "view": "home-cinema.html"
+      },
+      {
+        "route": "/tv",
+        "view": "tv.html"
+      },
+      {
+        "route": "/movies",
+        "view": "movies.html"
+      },
+      {
+        "route": "/cinema-genres",
+        "view": "cinema-genres.html"
+      },
+      {
+        "route": "/channels",
+        "view": "channels.html"
+      }
+    ]
   })
 
   // if the env is electron, we can use IPC to get the i18n strings now. we need
-  // them sooner in this env because the connection screen has strings, but will
-  // never have a http connection
+  // them sooner in this env for offline usage. the web app will load them over
+  // http.
   if (env === 'electron') {
     window.i18n = await window.Bridge.ipcAsk('get-i18n')
   }
   
   // the app renders itself upon injection
   document.getElementById('root').innerHTML = `<music-app id="app" env="${env}"></music-app>`
-
-  if (Bridge.appDebug) {
-    console.log('<music-app> injected')
-  }
 }
 
 initTheme()

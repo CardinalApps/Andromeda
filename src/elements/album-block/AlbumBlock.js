@@ -30,7 +30,6 @@ export class AlbumBlock extends Lowrider {
    * Builds the inner HTML.
    */
   async onBuild() {
-    console.log('building')
     let mergeTags = await this.makeMergeTags()
 
     this.innerHTML = await html('/elements/album-block/album-block.html', mergeTags)

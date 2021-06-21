@@ -3,7 +3,6 @@ import { html } from '../../../node_modules/html.js/index.js'
 import i18n from '../../../node_modules/i18n.js/index.js'
 import Query from '../../../node_modules/sqleary.js/index.js'
 import Lowrider from '../../../node_modules/lowrider.js/index.js'
-import * as modal from '../../modal.js'
 
 export class PlaylistBlock extends Lowrider {
   /**
@@ -50,7 +49,7 @@ export class PlaylistBlock extends Lowrider {
     // if there's tracks, render a list of albums
     if (trackCount) {
       // insert loading svg
-      __(this).find('.albums-in-playlist').appendHtml(await __().getFileContents('/images/loading.svg'))
+      __(this).find('.albums-in-playlist').appendHtml(await html('/images/loading.svg'))
 
       // no tracks
       if (!trackCount) {

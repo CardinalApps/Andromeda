@@ -24,7 +24,7 @@ export class ArtistBlock extends Lowrider {
     // @listens new-album
     // listen to new-album instead of new-artist so that we can rerender when
     // albums 1-4 are added during import
-    Bridge.ipcListen('new-album', this.boundNewAlbumListener)
+    //Bridge.ipcListen('new-album', this.boundNewAlbumListener)
   }
 
   /**
@@ -57,7 +57,7 @@ export class ArtistBlock extends Lowrider {
    * When the instance is removed from the document.
    */
   onRemoved() {
-    Bridge.removeListener('new-album', this.boundNewAlbumListener)
+    //Bridge.removeListener('new-album', this.boundNewAlbumListener)
   }
 
   /**
@@ -129,7 +129,7 @@ export class ArtistBlock extends Lowrider {
    */
   async _renderAsSimpleLayout() {
     let artistId = __(this).attr('artistid')
-    let markup = await __().getFileContents('/elements/artist-block/artist-block-simple.html')
+    let markup = await html('/elements/artist-block/artist-block-simple.html')
 
     // if there's no artist photo, use up to 4 album arts as the background
     if (!this.artistObj.artist_photo) {

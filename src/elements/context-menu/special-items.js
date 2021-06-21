@@ -7,6 +7,7 @@
 import __ from '../../../node_modules/double-u/index.js'
 import i18n from '../../../node_modules/i18n.js/index.js'
 import Query from '../../../node_modules/sqleary.js/index.js'
+import { html } from '../../../node_modules/html.js/index.js'
 
 /**
  * Add to playlist special item. This item renders a list of all playlists from the database into a dropdown,
@@ -32,7 +33,7 @@ export async function addToPlaylist(options = {}) {
   menuItem.appendHtml(/*html*/`
     <div class="submenu-box entry-animation">
       <ol class="submenu">
-        ${await __().getFileContents('/images/loading.svg')}
+        ${await html('/images/loading.svg')}
       </ol>
     </div>
   `)

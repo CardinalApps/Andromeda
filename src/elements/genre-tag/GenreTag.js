@@ -108,9 +108,12 @@ export class GenreTag extends Lowrider {
    * Queries the database for the current favorite genres
    * 
    * @returns {array} An array of genres, maybe empty.
+   * 
+   * TODO
    */
   async getFavorites() {
-    let genres = await Bridge.ipcAsk('get-option', 'favorite_genres')
+    return []
+    //let genres = await Bridge.ipcAsk('get-option', 'favorite_genres')
 
     // no favorites in the db
     if (!genres) {

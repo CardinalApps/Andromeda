@@ -1,0 +1,16 @@
+{
+  "name": "Cardinal Music",
+  "short_name": "Music",
+  "description": "Play music from Cardinal Server with the Cardinal Music web app.",
+  "display": "standalone",
+  "background_color": "#272727",
+  "theme_color": "#1d1d1d",
+  "icons": [
+    {
+      "src": "/music/favicon.ico",
+      "sizes": "16x16 32x32 48x48 64x64 128x128 256x256"
+    }
+  ],
+  "orientation": "portrait",
+  "categories": ["entertainment"]
+}

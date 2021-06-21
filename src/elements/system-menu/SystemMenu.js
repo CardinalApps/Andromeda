@@ -7,6 +7,8 @@ export class SystemMenu extends Lowrider {
    * When an instance of the element is created in the DOM.
    */
   async onSpawn() {
+    if (Bridge.env !== 'electron') return false
+
     this.clickOutsideToCloseListener = this.clickOutsideToClose.bind(this)
     this.type = __(this).attr('type')
 
@@ -17,6 +19,8 @@ export class SystemMenu extends Lowrider {
    * Builds the inner HTML.
    */
   async onBuild() {
+    if (Bridge.env !== 'electron') return false
+    
     this.innerHTML = await html('/elements/system-menu/system-menu.html')
 
     let systemMenuArray = JSON.parse(await Bridge.ipcAsk('get-system-menu'))
@@ -75,6 +79,7 @@ export class SystemMenu extends Lowrider {
    * After this instance is removed.
    */
   async onRemoved() {
+    if (Bridge.env !== 'electron') return
     __('music-app').el().removeEventListener('click', this.clickOutsideToCloseListener)
   }
 
