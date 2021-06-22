@@ -57,6 +57,18 @@ music-app {
     }
   }
 
+  &[env="web"] {
+    .native-only {
+      display: none;
+    }
+  }
+
+  &[env="electron"] {
+    .web-only {
+      display: none;
+    }
+  }
+
   // when the setting panel is open
   &.settings-open {
   

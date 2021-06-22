@@ -43,10 +43,10 @@
           <h2>{i18n{settings.tab-name-music-playback}}</h2>
 
           <!-- Notifications -->
-          {inc{/elements/music-settings/templates/playback/notifications.html}}
+          {{settings-field/general/notifications}}
           
           <!-- Playback flags -->
-          {inc{/elements/music-settings/templates/playback/flags.html}}
+          <!-- {{settings-field/playback/flags}} -->
         </div>
       </div>
 
@@ -78,13 +78,13 @@
       data-tab-icon="dungeon">
 
         <div class="settings-pane">
-          <h2>{i18n{settings.tab-name-general}}</h2>
+          <h2>{i18n{settings.tab-name-advanced}}</h2>
 
           <!-- Developer -->
           {{settings-field/advanced/developer}}
 
           <!-- Factory reset -->
-          {inc{/elements/music-settings/templates/advanced/factory-reset.html}}
+          {{settings-field/advanced/factory-reset}}
         </div>
       </div>
     </div>

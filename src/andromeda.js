@@ -35,6 +35,7 @@ async function initTheme() {
   // the env than parsing the agent string.
   const ipcConnected = await window.Bridge.init('ipc')
   const env = ipcConnected ? 'electron' : 'web'
+  const touch = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0))
 
   // init app audio player
   window.Player = new Boogietime({
@@ -136,7 +137,7 @@ async function initTheme() {
   }
   
   // the app renders itself upon injection
-  document.getElementById('root').innerHTML = `<music-app id="app" env="${env}"></music-app>`
+  document.getElementById('root').innerHTML = `<music-app id="app" env="${env}" touch="${touch}"></music-app>`
 }
 
 initTheme()

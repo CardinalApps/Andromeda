@@ -2364,6 +2364,20 @@ button.close-modal i, form .close-modal.btn i { color: var(--accent-color); }
 
 music-app.floating-modal-open #nav-pillar { -webkit-app-region: no-drag !important; }
 
+/** Adjustments for when we are running on the web. */
+music-app[env="web"] #win32-window-controls { display: none; }
+
+music-app[env="web"] #nav-pillar { padding-top: 15px; }
+
+/** Adjust the app for touch devices. */
+#app[touch="true"] main#view .view-content.has-fixed-header { height: calc(100vh - var(--playback-controls-height)); margin-top: 0; }
+
+#app[touch="true"] main#view .view-content.has-fixed-header header { position: static; }
+
+/** Touch devices up to iPad Pro size. */
+@media only screen and (min-width: 1024px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) { #app[touch="true"] #nav-pillar { position: fixed; top: 0; left: 0; bottom: 0; z-index: 3; transform: translateX(-100%); }
+  #app[touch="true"] #view-pillar { width: 100%; } }
+
 music-app { width: 100%; height: 100%; display: block; }
 
 music-app.shift-down [on-shift-down] { display: block !important; }
@@ -2385,6 +2399,10 @@ music-app[os="win32"] .win32-only { display: block; }
 music-app[os="win32"] .win32-only.inline { display: inline; }
 
 music-app[os="win32"] .darwin-only { display: none !important; }
+
+music-app[env="web"] .native-only { display: none; }
+
+music-app[env="electron"] .web-only { display: none; }
 
 music-app.settings-open #nav-pillar { -webkit-app-region: no-drag; }
 
@@ -3396,7 +3414,7 @@ media-feed .throttled .throttle { animation: throttled 5s linear; }
   media-feed .feed-layout-container.big-buttons._4 .big-button:nth-of-type(3) { margin-bottom: 0; }
   media-feed .feed-layout-container.big-buttons._4 .big-button:last-of-type { margin-bottom: 0; } }
 
-@media screen and (max-width: 1200px) { media-feed .feed-layout-container.half { width: 100% !important; margin-left: 0; margin-right: 0; padding-right: var(--feed-view-right-padding) !important; padding-left: var(--feed-view-left-padding) !important; } }
+@media screen and (max-width: 1200px) { #app[touch="false"] media-feed .feed-layout-container.half { width: 100% !important; margin-left: 0; margin-right: 0; padding-right: var(--feed-view-right-padding) !important; padding-left: var(--feed-view-left-padding) !important; } }
 
 @media screen and (max-width: 900px) { media-feed .feed-layout-container.big-buttons._4 { width: 100%; margin-left: auto; margin-right: auto; }
   media-feed .feed-layout-container.big-buttons._4 .big-button { width: 220px; margin: 0 8px 16px; }
@@ -3524,6 +3542,8 @@ media-feed-top-tracks { width: 100%; height: 100%; display: block; }
 media-feed-top-tracks track-block:nth-of-type(3n) { margin-bottom: 0; }
 
 media-feed-shuffle-music { width: 100%; height: 100%; display: block; position: relative; }
+
+media-feed-shuffle-music .container-inner { overflow: hidden; }
 
 media-feed-recently-played-albums { display: block; }
 

@@ -1,0 +1,12 @@
+/**
+ * Adjustments for when we are running on the web.
+ */
+music-app[env="web"] {
+
+  #win32-window-controls { display: none; }
+
+  #nav-pillar {
+    padding-top: 15px;
+  }
+
+}

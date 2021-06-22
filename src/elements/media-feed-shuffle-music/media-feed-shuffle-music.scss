@@ -3,5 +3,8 @@ media-feed-shuffle-music {
   height: 100%;
   display: block;
   position: relative;
-}
 
+  .container-inner {
+    overflow: hidden;
+  }
+}

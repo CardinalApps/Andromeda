@@ -1,6 +1,6 @@
 {
   "name": "Cardinal Music",
-  "short_name": "Music",
+  "short_name": "Cardinal Music",
   "description": "Play music from Cardinal Server with the Cardinal Music web app.",
   "display": "standalone",
   "background_color": "#272727",

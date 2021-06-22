@@ -154,6 +154,8 @@ media-feed {
         justify-content: center;
 
         .big-button {
+          //width: 35%;
+          //height: 150%;
           width: 240px;
           height: 210px;
           margin: 0 15px;
@@ -219,20 +221,6 @@ media-feed {
     overflow: hidden;
     background: none;
     transition: all 100ms;
-
-    // Orignally, I forgot to put the initial scale value here, and it created a
-    // weird bug that:
-    //
-    // 1. Caused the "Echoes (GPU)" process to immediately run up to 50-70%
-    // and hang there until the element(s) were removed from the DOM. 
-    // 2. Caused the CPU temps and the fans to max out.
-    // 3. Only happened if music was playing at the same time.
-    // 4. And the real head scratcher... only happened when the JS was bundled.
-    //
-    // I was never able to reproduce in Electron Fiddle. However, the bug
-    // consistenly happenes in Echoes v0.1.2 and v0.1.1... but only when running
-    // the .exe/.dmg OR running in VS Code with bundled JS. I only encountered
-    // this bug on macOS Catalina.
     transform: scale(1);
 
     &:hover {
@@ -373,14 +361,18 @@ media-feed {
 
 @media screen and (max-width: 1200px) {
 
-  media-feed {
+  // on desktop
+  #app[touch="false"] {
 
-    .feed-layout-container.half {
-      width: 100% !important;
-      margin-left: 0;
-      margin-right: 0;
-      padding-right: var(--feed-view-right-padding) !important;
-      padding-left: var(--feed-view-left-padding) !important;
+    media-feed {
+
+      .feed-layout-container.half {
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+        padding-right: var(--feed-view-right-padding) !important;
+        padding-left: var(--feed-view-left-padding) !important;
+      }
     }
   }
 

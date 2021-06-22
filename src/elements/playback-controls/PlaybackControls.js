@@ -164,6 +164,8 @@ export class PlaybackControls extends Lowrider {
     this._currentWaveformTimeout = setTimeout(async () => {
       console.log('Requesting waveform from server')
 
+      if (Player.state !== 'playing' && Player.state !== 'paused') return
+
       let waveformReq = await Bridge.httpApi(`/music-track/${Player.trackObj.id}/waveform`)
       
       if (waveformReq.statusRange !== 2) {

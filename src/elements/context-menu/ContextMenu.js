@@ -361,8 +361,13 @@ export class ContextMenu extends Lowrider {
   /**
    * When invoked, this will add event handlers to the given element that listen for right clicks, and create
    * a new <context-menu> when one is detected.
+   * 
+   * @param {Element} el
    */
   static listenForRightClicks(el) {
+    /**
+     * Listen for right clicks
+     */
     el.addEventListener('mouseup', (event) => {
       if (event.which !== 3) return
 
@@ -371,7 +376,7 @@ export class ContextMenu extends Lowrider {
         return
       }
 
-      window.lastElementRightClicked = event.path[0]
+      window.lastElementRightClicked = event.composedPath()[0] || null
 
       // close all open context-menus, including ones opened as dot-menu's, before opening a right click context-menu
       ContextMenu.maybeCloseAllContextMenus(event)
@@ -397,6 +402,13 @@ export class ContextMenu extends Lowrider {
       // now that there's a right-click menu open, start listening for clicks outside
       el.addEventListener('click', rmbClickOutsideToClose)
     })
+
+    /**
+     * Disable the system context menu.
+     */
+    document.oncontextmenu = (event) => {
+      event.preventDefault()
+    }
   }
 
   /**
