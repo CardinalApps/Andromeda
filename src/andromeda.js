@@ -137,7 +137,7 @@ async function initTheme() {
   }
   
   // the app renders itself upon injection
-  document.getElementById('root').innerHTML = `<music-app id="app" env="${env}" touch="${touch}"></music-app>`
+  document.getElementById('root').innerHTML = `<music-app id="app" env="${env}" ${touch ? 'touch' : ''}></music-app>`
 }
 
 initTheme()

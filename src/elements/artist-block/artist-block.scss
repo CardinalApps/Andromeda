@@ -5,7 +5,7 @@ artist-block {
   position: relative;
   display: block;
 
-  &.interacting, &:hover {
+  &.interacting {
 
     .controls {
       opacity: 1;
@@ -192,6 +192,21 @@ artist-block[layout="bio"] {
         font: 500 16px var(--base-font);
         color: var(--color-opposite);
       }
+    }
+  }
+}
+
+#app:not([touch]) {
+
+  // hoving with a mouse shows an overlay
+  artist-block:hover {
+
+    .controls {
+      opacity: 1;
+    }
+
+    .art .albums-bg:before {
+      opacity: 1 !important;
     }
   }
 }

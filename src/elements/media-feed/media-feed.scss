@@ -223,6 +223,9 @@ media-feed {
     transition: all 100ms;
     transform: scale(1);
 
+    // https://gist.github.com/ayamflow/b602ab436ac9f05660d9c15190f4fd7b
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+
     &:hover {
 
       .inner:before {
@@ -364,7 +367,7 @@ media-feed {
 @media screen and (max-width: 1200px) {
 
   // on desktop
-  #app[touch="false"] {
+  #app:not([touch]) {
 
     media-feed {
 

@@ -51,6 +51,9 @@ export class MediaFeedShuffleMusic extends Lowrider {
   registerEventListeners() {
     let btn = this.querySelector('button')
 
+    /**
+     * Desktop events
+     */
     btn.addEventListener('mouseenter', () => {
       btn.classList.add('over')
     })
@@ -60,13 +63,13 @@ export class MediaFeedShuffleMusic extends Lowrider {
     })
 
     btn.addEventListener('mousedown', (event) => {
-      if (event.which !== 1) return
+      if (event.button !== 0) return
       btn.classList.add('press')
       btn.classList.remove('over')
     })
 
     btn.addEventListener('mouseup', (event) => {
-      if (event.which !== 1 || !btn.classList.contains('press')) return
+      if (event.button !== 0 || !btn.classList.contains('press')) return
       btn.classList.remove('press')
       this.insertIcon()
 
@@ -88,6 +91,17 @@ export class MediaFeedShuffleMusic extends Lowrider {
       if (Date.now() - this.lastShuffle > this.shuffleThrottle) {
         this.shuffleAndPlay()
       }
+    })
+
+    /**
+     * Touch events
+     */
+    btn.addEventListener('touchstart', (event) => {
+      btn.classList.add('press')
+    })
+
+    btn.addEventListener('touchend', (event) => {
+      btn.classList.remove('press')
     })
   }
 

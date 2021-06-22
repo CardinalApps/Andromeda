@@ -45,9 +45,11 @@ export class AlbumBlock extends Lowrider {
    * After inner HTML has rendered.
    */
   onLoad() {
-    this.supportInteractingState({
-      'rightClickEls': [this.querySelector('.art')]
-    })
+    if (!this.closest('#app').hasAttribute('touch')) {
+      this.supportInteractingState({
+        'rightClickEls': [this.querySelector('.art')]
+      })
+    }
   }
 
   /**

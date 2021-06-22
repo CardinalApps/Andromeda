@@ -116,7 +116,7 @@ track-block {
  */
 track-block[mode="expanded"] {
   margin-bottom: 6px;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: var(--border-radius-small);
   background: var(--base-darker-1);
 
@@ -125,14 +125,14 @@ track-block[mode="expanded"] {
     background: var(--base-lighter-1);
 
     .play-col {
-      play-button { display: block; }
+      play-button { display: flex; }
       .track-num { display: none; }
     }
   }
 
   &[playbutton="permanent"], &.is-playing {
     .play-col {
-      play-button { display: block; }
+      play-button { display: flex; }
       .track-num { display: none; }
     }
   }
@@ -158,9 +158,11 @@ track-block[mode="expanded"] {
       width: auto;
       height: auto;
       display: none;
-      position: relative;
-      left: -1px;
-      top: 1px;
+      // position: relative;
+      // left: -1px;
+      // top: 1px;
+      align-items: center;
+      justify-content: center;
     }
 
     .track-num {
@@ -288,6 +290,19 @@ track-block[mode="expanded"] {
       i {
         font-size: 16px;
       }
+    }
+  }
+}
+
+#app[touch] {
+
+  // disable background color change on mobile taps
+  track-block[mode="expanded"] {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:hover {
+      background: var(--base-darker-1);
     }
   }
 }

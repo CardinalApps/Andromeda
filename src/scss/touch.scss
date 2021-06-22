@@ -1,15 +1,24 @@
 /**
  * Adjust the app for touch devices.
  */
-#app[touch="true"] {
+#app[touch] {
+  --focus-space: 0px;
+
+  #top-grab { display: none; }
 
   main#view {
 
     .view-content {
+      height: calc(100vh - var(--playback-controls-height) - 34px);
       margin-right: 0;
 
+      // media feed has a different layout
+      &:not(.media-feed-view-content) header {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
       &.has-fixed-header {
-        height: calc(100vh - var(--playback-controls-height));
         margin-top: 0;
 
         header {
@@ -24,7 +33,7 @@
  * Touch devices up to iPad Pro size.
  */
 @media only screen and (min-width: 1024px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) {
-  #app[touch="true"] {
+  #app[touch] {
     
     #nav-pillar {
       position: fixed;

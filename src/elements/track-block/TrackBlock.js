@@ -335,7 +335,7 @@ export class TrackBlock extends Lowrider {
      */
     this.querySelector('button.toggle-favorite').addEventListener('click', async (event) => {
       // event must be a left click
-      if (event.which !== 1) return
+      // if (event.button !== 1) return
 
       // this track is already a favorite, remove it
       if (await this.isFavorite()) {

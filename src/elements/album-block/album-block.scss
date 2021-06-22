@@ -15,7 +15,6 @@ album-block {
     }
   }
 
-  .art:hover,
   &.child-focused {
     
     .art-inner {
@@ -139,6 +138,18 @@ album-block {
 
     .label {
       font-weight: 600;
+    }
+  }
+}
+
+#app:not([touch]) {
+
+  // hoving with a mouse shows an overlay
+  album-block:hover {
+
+    .art-inner {
+      opacity: 1;
+      border-radius: calc(var(--border-radius-small) - 1px);
     }
   }
 }

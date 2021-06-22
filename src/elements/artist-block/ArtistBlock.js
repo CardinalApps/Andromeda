@@ -47,9 +47,11 @@ export class ArtistBlock extends Lowrider {
   onLoad() {
     // only the thumb layout supports the interacting state
     if (__(this).attr('layout') !== 'bio') {
-      this.supportInteractingState({
-        'rightClickEls': [this.querySelector('.art')]
-      })
+      if (!this.closest('#app').hasAttribute('touch')) {
+        this.supportInteractingState({
+          'rightClickEls': [this.querySelector('.art')]
+        })
+      }
     }
   }
 

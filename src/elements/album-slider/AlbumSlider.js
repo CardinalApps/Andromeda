@@ -73,7 +73,7 @@ export class AlbumSlider extends Lowrider {
             // because of the different sidebar on tablet vs desktop, at the
             // same breakpoint, 3 looks better on tablet, and 5 looks better on
             // desktop
-            'slidesPerView': this.closest('#app').getAttribute('touch') === 'true' ? 3 : 5,
+            'slidesPerView': this.closest('#app').hasAttribute('touch') ? 3 : 5,
             'slidesPerGroup': 3
           },
           1200: {
