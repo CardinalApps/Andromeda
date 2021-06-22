@@ -5,12 +5,16 @@
 
   main#view {
 
-    .view-content.has-fixed-header {
-      height: calc(100vh - var(--playback-controls-height));
-      margin-top: 0;
+    .view-content {
+      margin-right: 0;
 
-      header {
-        position: static;
+      &.has-fixed-header {
+        height: calc(100vh - var(--playback-controls-height));
+        margin-top: 0;
+
+        header {
+          position: static;
+        }
       }
     }
   }
@@ -35,4 +39,6 @@
       width: 100%;
     }
   }
+
+
 }

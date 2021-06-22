@@ -66,7 +66,7 @@ export class AlbumSlider extends Lowrider {
             'slidesPerGroup': 2
           },
           950: {
-            'slidesPerView': 4,
+            'slidesPerView': 3,
             'slidesPerGroup': 2
           },
           1100: {

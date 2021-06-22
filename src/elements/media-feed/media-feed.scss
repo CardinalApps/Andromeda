@@ -305,7 +305,7 @@ media-feed {
       .title {
         width: 100%;
         height: 60px;
-        font: 500 16px var(--accent-font);
+        font: 500 16px/1em var(--accent-font);
         text-transform: uppercase;
         display: flex;
         align-items: center;
@@ -339,12 +339,14 @@ media-feed {
   media-feed {
 
     .feed-layout-container.big-buttons._4 {
-      width: 600px;
+      //width: 600px;
       margin-left: auto;
       margin-right: auto;
 
       .big-button {
         margin: 0 15px 30px;
+        width: 210px;
+        height: 180px;
 
         &:nth-of-type(3) {
           margin-bottom: 0;
@@ -365,6 +367,10 @@ media-feed {
   #app[touch="false"] {
 
     media-feed {
+
+      .feed-layout-container.big-buttons._4 {
+        width: 600px;
+      }
 
       .feed-layout-container.half {
         width: 100% !important;

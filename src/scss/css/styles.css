@@ -2370,6 +2370,8 @@ music-app[env="web"] #win32-window-controls { display: none; }
 music-app[env="web"] #nav-pillar { padding-top: 15px; }
 
 /** Adjust the app for touch devices. */
+#app[touch="true"] main#view .view-content { margin-right: 0; }
+
 #app[touch="true"] main#view .view-content.has-fixed-header { height: calc(100vh - var(--playback-controls-height)); margin-top: 0; }
 
 #app[touch="true"] main#view .view-content.has-fixed-header header { position: static; }
@@ -3405,16 +3407,17 @@ media-feed .throttled .throttle { animation: throttled 5s linear; }
 
 .media-feed-block button.media-feed-button .inner .icon, .media-feed-block form .media-feed-button.btn .inner .icon, form .media-feed-block .media-feed-button.btn .inner .icon { font-size: 60px; position: relative; top: -14%; cursor: pointer; color: var(--accent-color); transform: scale(1); transition: all 150ms; }
 
-.media-feed-block button.media-feed-button .inner .title, .media-feed-block form .media-feed-button.btn .inner .title, form .media-feed-block .media-feed-button.btn .inner .title { width: 100%; height: 60px; font: 500 16px var(--accent-font); text-transform: uppercase; display: flex; align-items: center; justify-content: center; position: absolute; bottom: 0; left: 0; right: 0; color: var(--color-cream); cursor: pointer; }
+.media-feed-block button.media-feed-button .inner .title, .media-feed-block form .media-feed-button.btn .inner .title, form .media-feed-block .media-feed-button.btn .inner .title { width: 100%; height: 60px; font: 500 16px/1em var(--accent-font); text-transform: uppercase; display: flex; align-items: center; justify-content: center; position: absolute; bottom: 0; left: 0; right: 0; color: var(--color-cream); cursor: pointer; }
 
 .media-feed-block button.media-feed-button .throttle, .media-feed-block form .media-feed-button.btn .throttle, form .media-feed-block .media-feed-button.btn .throttle { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0; z-index: 3; pointer-events: none; transition: top 5000ms, opacity 100ms; background: rgba(255, 255, 255, 0.1); }
 
-@media screen and (max-width: 1450px) { media-feed .feed-layout-container.big-buttons._4 { width: 600px; margin-left: auto; margin-right: auto; }
-  media-feed .feed-layout-container.big-buttons._4 .big-button { margin: 0 15px 30px; }
+@media screen and (max-width: 1450px) { media-feed .feed-layout-container.big-buttons._4 { margin-left: auto; margin-right: auto; }
+  media-feed .feed-layout-container.big-buttons._4 .big-button { margin: 0 15px 30px; width: 210px; height: 180px; }
   media-feed .feed-layout-container.big-buttons._4 .big-button:nth-of-type(3) { margin-bottom: 0; }
   media-feed .feed-layout-container.big-buttons._4 .big-button:last-of-type { margin-bottom: 0; } }
 
-@media screen and (max-width: 1200px) { #app[touch="false"] media-feed .feed-layout-container.half { width: 100% !important; margin-left: 0; margin-right: 0; padding-right: var(--feed-view-right-padding) !important; padding-left: var(--feed-view-left-padding) !important; } }
+@media screen and (max-width: 1200px) { #app[touch="false"] media-feed .feed-layout-container.big-buttons._4 { width: 600px; }
+  #app[touch="false"] media-feed .feed-layout-container.half { width: 100% !important; margin-left: 0; margin-right: 0; padding-right: var(--feed-view-right-padding) !important; padding-left: var(--feed-view-left-padding) !important; } }
 
 @media screen and (max-width: 900px) { media-feed .feed-layout-container.big-buttons._4 { width: 100%; margin-left: auto; margin-right: auto; }
   media-feed .feed-layout-container.big-buttons._4 .big-button { width: 220px; margin: 0 8px 16px; }
