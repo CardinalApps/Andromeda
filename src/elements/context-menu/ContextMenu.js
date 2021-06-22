@@ -87,6 +87,8 @@ export class ContextMenu extends Lowrider {
       let menuButton = __(el)
 
       el.addEventListener('mouseenter', (event) => {
+        if (this.closest('#app').hasAttribute('touch')) return
+
         let contextMenu = menuButton.closest('context-menu')
         let group = menuButton.closest('.group-items').attr('data-group')
         let slug = menuButton.attr('data-label')
@@ -96,6 +98,8 @@ export class ContextMenu extends Lowrider {
       })
 
       el.addEventListener('mouseleave', (event) => {
+        if (this.closest('#app').hasAttribute('touch')) return
+
         if (menuButton.hasClass('dropdown-item') && menuButton.hasClass('open')) {
           menuButton.find('.submenu-box').remove()
           menuButton.removeClass('open')
