@@ -44,19 +44,25 @@ artist-grid {
   }
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1024px) {
+  artist-grid[size="full"] .grid artist-block {
+    width: calc(20% - 20px);
+  }
+}
+
+@media screen and (max-width: 1023px) {
   artist-grid[size="full"] .grid artist-block {
     width: calc(25% - 20px);
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   artist-grid[size="full"] .grid artist-block {
     width: calc(33.3333% - 20px);
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 700px) {
   artist-grid[size="full"] .grid artist-block {
     width: calc(50% - 20px);
   }

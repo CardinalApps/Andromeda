@@ -6,10 +6,41 @@
 
   #top-grab { display: none; }
 
+  #back-button {
+    width: 30px;
+    height: 30px;
+    top: 79px;
+    left: 10px;
+  }
+
+  #nav-pillar {
+
+    .menus {
+
+      li {
+
+        a {
+          font-size: 14px;
+
+          span[tabindex="-1"] {
+            padding-top: 8px;
+            padding-bottom: 8px;
+          }
+
+          i {
+            margin-right: 16px;
+            font-size: 20px !important;
+          }
+        }
+      }
+    }
+  }
+
   main#view {
 
     .view-content {
-      height: calc(100vh - var(--playback-controls-height) - 34px);
+      height: calc(100vh - var(--playback-controls-height) - var(--mobile-top-nav-height) - 34px);
+      margin-top: var(--mobile-top-nav-height) !important;
       margin-right: 0;
 
       // media feed has a different layout
@@ -32,7 +63,7 @@
 /**
  * Touch devices up to iPad Pro size.
  */
-@media only screen and (min-width: 1024px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) {
+@media only screen and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) {
   #app[touch] {
     
     #nav-pillar {
@@ -48,6 +79,54 @@
       width: 100%;
     }
   }
+}
 
+/**
+ * Touch devices up to iPhone.
+ */
+@media only screen and (max-height: 768px) and (-webkit-min-device-pixel-ratio: 1.5) {
+  #app[touch] {
+    --gutter: 10px;
 
+    h1 {
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    #mobile-logo {
+      margin-right: 15px;
+    }
+    
+    main#view {
+
+      #view-header {
+        padding-right: var(--gutter);
+      }
+
+      .view-content {
+        height: calc(100% - var(--playback-controls-height) - var(--mobile-top-nav-height));
+        padding-right: var(--gutter);
+        padding-left: var(--gutter);
+      }
+    }
+
+    media-feed {
+      --feed-view-left-padding: 0;
+      --feed-view-right-padding: 0;
+
+      .big-button {
+        width: calc(50% - 16px) !important;
+        height: 150px !important;
+
+        i {
+          font-size: 40px !important;
+        }
+
+        .title {
+          height: 40px !important;
+          font-size: 12px !important;
+        }
+      }
+    }
+  }
 }

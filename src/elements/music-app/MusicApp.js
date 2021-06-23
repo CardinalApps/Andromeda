@@ -162,6 +162,11 @@ export class MusicApp extends AppBase {
     // send the state on app load to let the server know the current state is
     // "stopped" (as it always is when the app first boots up)
     this.sendStateToServer()
+
+    // TODO move to core app
+    __('.nav-pillar-push').on('click', () => {
+      __(this).toggleClass('nav-pillar-push')
+    })
   }
 
   /**

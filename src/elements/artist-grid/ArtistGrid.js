@@ -122,6 +122,11 @@ export class ArtistGrid extends Lowrider {
    * Triggered every time the user scrolls far enough down to trigger a load point.
    */
   async onInfiniteScroll() {
+    // user may scroll before initial query is finished
+    if (!this.Query) {
+      return
+    }
+
     // do nothing if already loading a page
     if (this.pageIsLoading) return
 

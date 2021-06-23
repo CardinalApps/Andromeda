@@ -457,6 +457,17 @@ div[tabindex="0"] {
   opacity: 0;
 }
 
+#app {
+  transition: transform var(--nav-pillar-push-speed);
+
+  &.nav-pillar-push {
+    transform: translateX(var(--nav-pillar-width));
+
+    #nav-pillar { transform: translateX(0); }
+    #nav-pillar-push-cover { display: block; }
+  }
+}
+
 #app-frame {
   width: 100%;
   height: 100%;
@@ -492,6 +503,7 @@ div[tabindex="0"] {
   align-content: space-between;
   background: var(--base-lighter-1);
   z-index: 3;
+  transition: transform var(--nav-pillar-push-speed);
   -webkit-app-region: drag;
 
   &.showing-search-results {
@@ -700,6 +712,16 @@ div[tabindex="0"] {
   position: relative;
   z-index: 1;
   background: var(--base-color);
+
+  #nav-pillar-push-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5000;
+    display: none;
+  }
 }
 
 #queue-pillar {
@@ -738,7 +760,7 @@ main#view {
   
   .view-content {
     height: calc(100% - #{var(--playback-controls-height)});
-    padding: 0 45px 0 50px;
+    padding: 0 45px 0 var(--gutter);
     margin-right: 5px;
     overflow-y: scroll;
        
@@ -755,7 +777,7 @@ main#view {
   header {
     width: 100%;
     height: var(--view-header-height);
-    padding: 0 60px 0 50px;
+    padding: 0 60px 0 var(--gutter);
     position: absolute;
     top: 0;
     left: 0;
@@ -786,6 +808,68 @@ main#view {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+  }
+}
+
+nav.mobile-top {
+  width: 100%;
+  padding: 8px var(--gutter);
+  height: var(--mobile-top-nav-height);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: var(--defining-border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--base-darker-1);
+
+  > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  #mobile-logo {
+    height: 100%;
+    margin-right: 30px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+      
+      span[tabindex="-1"] {
+        padding: 4px 11px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        border-radius: 50px;
+        font: 600 11px var(--base-font);
+        color: var(--color-cream);
+        border: 1px solid var(--base-darker-3);
+        background: var(--base-lighter-1);
+
+        &:active {
+          color: var(--almost-black);
+          background: var(--accent-color);
+        }
+      }
+
+      i {
+        margin-right: 5px;
+        color: var(--color-faded);
+        font-size: 12px;
+      }
     }
   }
 }

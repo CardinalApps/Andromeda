@@ -20,7 +20,7 @@ export class PlaybackControls extends Lowrider {
     // there is still a delay here to not bombard the API if the user rapidly
     // steps through the queue, since the API will still immediately spin up new
     // a process that'll just get immediately cancelled
-    this._waveformDelay = 1250
+    this._waveformDelay = 500
     this._currentWaveformTimeout = null
 
     // callback for when the global Player state changes
@@ -140,6 +140,8 @@ export class PlaybackControls extends Lowrider {
   async onTrackChange(newTrackId) {
     //console.log('playback controls received new track id')
 
+    __(this).removeClass('waveform-error')
+
     // the 'stop' event itself within the global Player will trigger the
     // 'trackChange' event, which triggers this
     if (Player.state === 'stopped') return
@@ -169,7 +171,7 @@ export class PlaybackControls extends Lowrider {
       let waveformReq = await Bridge.httpApi(`/music-track/${Player.trackObj.id}/waveform`)
       
       if (waveformReq.statusRange !== 2) {
-        console.warn("Didn't get waveform from API")
+        __(this).addClass('waveform-error')
         return
       }
 
@@ -310,8 +312,10 @@ export class PlaybackControls extends Lowrider {
      * This registers new event handers that listen for actions while the lmb is
      * held down. When lmb is released, the event handlers are removed.
      */
-    this._scrubberButtonEl.addEventListener('mousedown', (event) => {
-      if (event.which !== 1) return // must be left click
+    let expandWaveform = (event) => {
+      event.preventDefault()
+      console.log('a')
+      //if (event.which !== 1) return // must be left click
       if (Player.state === 'stopped') return // audio must be playing or paused
 
       let playbackControlsX = __(this).position().x
@@ -321,7 +325,10 @@ export class PlaybackControls extends Lowrider {
        * registered while the waveform is open.
        */
       const dragProgressBar = (event) => {
+        event.preventDefault()
         this.stopTimeUpdating()
+
+        console.log('drag')
 
         let width = event.x - playbackControlsX
         this._scrubberButtonEl.classList.add('dragging')
@@ -333,7 +340,7 @@ export class PlaybackControls extends Lowrider {
 
         this.querySelector('.scrubber-time').innerHTML = /*html*/`
           <span class="drag-time" data-seconds="${secondsDragged}">
-            ${__().convertSecondsToHHMMSS(secondsDragged)} / ${__().convertSecondsToHHMMSS(songDuration)}
+            
           </span>`
       }
 
@@ -346,6 +353,8 @@ export class PlaybackControls extends Lowrider {
        * seek.
        */
       const scrubberMouseUpHandler = (event) => {
+        event.preventDefault()
+        console.log('up')
         // lmb was released within the scrubber, seek to that time
         if (__(event.target).parents('.scrubber').els.length) {
           let dragTime = this._scrubberButtonEl.querySelector('.drag-time')
@@ -361,8 +370,10 @@ export class PlaybackControls extends Lowrider {
         __(this._scrubberButtonEl).removeClass('expanded', 'dragging')
 
         // remove scrubber event handlers when lmb is released
-        document.removeEventListener('mouseup', scrubberMouseUpHandler)
         this._scrubberButtonEl.removeEventListener('mousemove', dragProgressBar)
+        this._scrubberButtonEl.removeEventListener('touchmove', dragProgressBar)
+        document.removeEventListener('mouseup', scrubberMouseUpHandler)
+        document.removeEventListener('touchend', scrubberMouseUpHandler)
       }
       
       // expand to show the waveform
@@ -370,7 +381,15 @@ export class PlaybackControls extends Lowrider {
 
       // register the listeners that only exist while lmb is held down
       this._scrubberButtonEl.addEventListener('mousemove', dragProgressBar)
+      this._scrubberButtonEl.addEventListener('touchmove', dragProgressBar)
       document.addEventListener('mouseup', scrubberMouseUpHandler)
+      document.addEventListener('touchend', scrubberMouseUpHandler)
+    }
+    
+    this._scrubberButtonEl.addEventListener('mousedown', expandWaveform)
+    this._scrubberButtonEl.addEventListener('touchstart', expandWaveform)
+    this._scrubberButtonEl.addEventListener('touchcancel', () => {
+      console.log('cancel')
     })
   }
 

@@ -95,6 +95,9 @@ export function registerDragNDropListeners(options) {
    * on DRAGEND of a drag item. this triggers on the element that fired the dragstart event. 
    */
   options.dragEl.addEventListener('dragend', (event) => {
+    // stops iOS from doing a google search with the dropped element HTML (lol?)
+    event.preventDefault()
+
     // trigger dragend callback
     if ('onDragEnd' in options && typeof options.onDragEnd === 'function') {
       options.onDragEnd(event)
@@ -110,6 +113,8 @@ export function registerDragNDropListeners(options) {
    * on DROP of the dragged item: inject the item into the correct drop zone and remove the old one.
    */
   options.dropEl.addEventListener('drop', (event) => {    
+    event.preventDefault()
+
     const droppedOn = options.dropEl
     const eventData = event.dataTransfer.getData('text/plain')
     let injected

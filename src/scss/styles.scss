@@ -24,8 +24,10 @@
 
   // animations
   --dragndrop-transition-speed: 100ms;
+  --nav-pillar-push-speed: 175ms;
 
   // other common units
+  --gutter: 50px;
   --letter-spacing: 0.05em;
   --focus-space: 8px; // the minimum amounce of space needed around elements that are focusable
   --top-grab-height: 23px;
@@ -33,6 +35,7 @@
   --right-pillar-width: 280px;
   --playback-controls-height: 80px;
   --view-header-height: 100px;
+  --mobile-top-nav-height: 36px;
 
   // space from the edges for floating modals
   --floating-top-space: 40px;

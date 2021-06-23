@@ -57,7 +57,7 @@ export class AlbumSlider extends Lowrider {
       config = {
         'slidesPerView': 2,
         'slidesPerGroup': 2,
-        'spaceBetween': 28,
+        'spaceBetween': 20,
         'roundLengths': true,
         'touchStartPreventDefault': false,
         'breakpoints': {
@@ -70,9 +70,6 @@ export class AlbumSlider extends Lowrider {
             'slidesPerGroup': 2
           },
           1100: {
-            // because of the different sidebar on tablet vs desktop, at the
-            // same breakpoint, 3 looks better on tablet, and 5 looks better on
-            // desktop
             'slidesPerView': this.closest('#app').hasAttribute('touch') ? 3 : 5,
             'slidesPerGroup': 3
           },
@@ -103,14 +100,14 @@ export class AlbumSlider extends Lowrider {
        * Default config
        */
       config = {
-        'slidesPerView': 2,
+        'slidesPerView': 3,
         'slidesPerGroup': 1,
         'spaceBetween': 20,
         'roundLengths': true,
         'touchStartPreventDefault': false,
         'breakpoints': {
           600: {
-            'slidesPerView': 2,
+            'slidesPerView': 3,
             'slidesPerGroup': 2
           },
           800: {
@@ -118,7 +115,7 @@ export class AlbumSlider extends Lowrider {
             'slidesPerGroup': 2
           },
           1000: {
-            'slidesPerView': 5,
+            'slidesPerView': this.closest('#app').hasAttribute('touch') ? 6 : 5,
             'slidesPerGroup': 3
           },
           1200: {

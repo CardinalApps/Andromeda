@@ -95,3 +95,20 @@ genre-tag {
     }
   }
 }
+
+@media (max-height: 768px) {
+  #app[touch] {
+
+    genre-tag[large] {
+      margin: 4px 2px;
+
+      a.router-link {
+        font-size: 12px;
+
+        .name {
+          padding: 8px 14px;
+        }
+      }
+    }
+  }
+}

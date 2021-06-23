@@ -485,6 +485,7 @@ form {
     border: var(--defining-border);
     border-radius: var(--border-radius-small);
     background: var(--base-darker-2);
+    -webkit-appearance: none;
 
     &:focus {
       @include active-outline();

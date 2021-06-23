@@ -28,7 +28,6 @@ music-app {
   }
 
   &[os="darwin"] {
-
     .darwin-only {
       display: block;
   
@@ -43,7 +42,6 @@ music-app {
   }
 
   &[os="win32"] {
-
     .win32-only {
       display: block;
   
@@ -59,13 +57,25 @@ music-app {
 
   &[env="web"] {
     .native-only {
-      display: none;
+      display: none !important;
     }
   }
 
   &[env="electron"] {
     .web-only {
-      display: none;
+      display: none !important;
+    }
+  }
+
+  &[touch] {
+    .mouse-only {
+      display: none !important;
+    }
+  }
+
+  &:not([touch]) {
+    .touch-only {
+      display: none !important;
     }
   }
 

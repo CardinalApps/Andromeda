@@ -14,9 +14,9 @@
     <!-- nav pillar -->
     <section id="nav-pillar">
       <div class="nav-top">
-        <header>
+        <header class="mouse-only">
           <div id="logo">
-            <a href="/explore-music" id="logo" class="router-link">
+            <a href="/explore-music" class="router-link">
               <span tabindex="-1">
                 <img src="images/logotype-light.svg" alt="{i18n{app-name}}">
               </span>
@@ -147,9 +147,42 @@
 
     <!-- center pillar -->
     <section id="view-pillar">
+      <!-- for closing the nav on mobile -->
+      <div id="nav-pillar-push-cover" class="nav-pillar-push"></div>
+
+      <!-- for dragging the application window in Electron -->
       <div id="top-grab" class="grab"></div>
 
-      <!-- back button -->
+      <!-- navigation bar on the top of the screen on phone and tablet -->
+      <nav class="mobile-top touch-only">
+        <div>
+          <div id="mobile-logo">
+            <a href="/explore-music" class="router-link">
+              <span tabindex="-1">
+                <img src="images/bird.svg" alt="{i18n{app-name}}">
+              </span>
+            </a>
+          </div>
+
+          <nav>
+            <a href="javascript:;" class="nav-pillar-push">
+              <span tabindex="-1">
+                <i class="fas fa-bars"></i>
+                {i18n{menu}}
+              </span>
+            </a>
+
+            <a href="javascript:;" class="open-settings" data-settings>
+              <span tabindex="-1">
+                <i class="fas fa-atom"></i>
+                {i18n{music-app.context-menu.settings}}
+              </span>
+            </a>
+          </nav> 
+        </div>
+      </nav>
+
+      <!-- back button for mice -->
       <button id="back-button" class="control-button clicks">
         <span tabindex="-1">
           <i class="fas fa-chevron-left"></i>

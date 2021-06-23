@@ -67,7 +67,7 @@ album-grid {
 
 @media screen and (max-width: 1100px) {
   album-grid[size="full"] .grid album-block {
-    width: calc(25% - 20px);
+    width: calc(33.3333% - 20px);
   }
 
   album-grid[size="med"] .grid album-block {
@@ -76,12 +76,53 @@ album-grid {
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
   album-grid[size="full"] .grid album-block {
     width: calc(50% - 20px);
   }
 
   album-grid[size="med"] .grid album-block {
     width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+
+  #app[touch] {
+
+    album-grid[size="full"] .grid album-block {
+      width: calc(33.3333% - 14px);
+    }
+
+    album-grid[size="med"] .grid album-block {
+      width: calc(50% - 14px);
+    }
+
+    album-grid {
+      
+      .grid {
+        width: calc(100% + 14px);
+        margin: 0 -7px;
+      }
+    }
+
+    album-grid[size="full"] {
+      .grid album-block {
+        margin: 0 7px 20px 7px;
+
+        .meta {
+          padding: 5px 0 0 0;
+
+          .other {
+            justify-content: space-between;
+          }
+        }
+
+        .title a {
+          font-size: 11px;
+          line-height: 1em;
+        }
+      }
+    }
   }
 }
