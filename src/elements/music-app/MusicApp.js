@@ -247,6 +247,8 @@ export class MusicApp extends AppBase {
    */
   setMainDotMenuItems() {
     if (this.getAttribute('env') === 'electron') {
+      if (! __('#main-dot-menu').els.length) return
+      
       __('#main-dot-menu').el().addMenuItems('start', {
         'group': i18n('app-name'),
         'items': {

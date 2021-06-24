@@ -47,16 +47,16 @@ export class PlaybackControls extends Lowrider {
   onLoad() {
     // create references to the UI elements
     this._currentlyPlayingSelector = '.currently-playing'
+    this._muteButtonSelector = 'button.mute'
+    this._queueButtonSelector = 'button.queue'
     this._scrubberButtonEl = this.querySelector('button.scrubber')
     this._repeatButtonEl = this.querySelector('button.repeat')
     this._shuffleButtonEl = this.querySelector('button.shuffle')
     this._previousButtonEl = this.querySelector('button.-previous')
     this._nextButtonEl = this.querySelector('button.-next')
     this._playPauseButtonEl = this.querySelector('button.-playPause')
-    this._muteButtonEl = this.querySelector('button.mute')
     this._currentPlaybackTimeEl = this.querySelector('.time .current')
     this._trackDurationEl = this.querySelector('.time .duration')
-    this._queueButtonEl = this.querySelector('button.queue')
     this._progressBarEl = this.querySelector('.progress')
     this._waveformContainerEl = this.querySelector('.waveform-container')
 
@@ -290,7 +290,7 @@ export class PlaybackControls extends Lowrider {
     /**
      * Mute button MOUSE CLICKED or SPACEBARRED
      */
-    this._muteButtonEl.addEventListener('click', (event) => {
+    __(this).find(this._muteButtonSelector).on('click', (event) => {
       if (Player.muted) {
         __(this).removeClass('muted')
         Player.unmute()
@@ -303,7 +303,7 @@ export class PlaybackControls extends Lowrider {
     /**
      * Queue button MOUSE CLICKED or SPACEBARRED
      */
-    this._queueButtonEl.addEventListener('click', (event) => {
+    __(this).find(this._queueButtonSelector).on('click', (event) => {
       __('music-app').toggleClass('queue-open')
     })
 
@@ -372,6 +372,7 @@ export class PlaybackControls extends Lowrider {
           }
         }
 
+        this.beginTimeUpdating()
         __(this._scrubberButtonEl).removeClass('expanded', 'dragging')
 
         // remove scrubber event handlers when lmb is released
@@ -430,8 +431,6 @@ export class PlaybackControls extends Lowrider {
       
       // truncate the percentage to 4 decimal places
       progressPercentage = progressPercentage.toFixed(4)
-
-      console.log(progressPercentage)
 
       __(this._progressBarEl).css({'width': `${progressPercentage}%`})
     }, 1000 / this._updatesPerSecond)
