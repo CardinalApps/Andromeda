@@ -122,3 +122,34 @@ track-list {
   }
 
 }
+
+@media screen and (max-width: 768px) {
+  track-list {
+
+    .title-row {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .playlist-stats {
+        order: 1;
+        margin-bottom: 15px;
+      }
+
+      .title {
+        width: 100%;
+        order: 2;
+        text-align: left;
+      }
+    }
+  }
+
+  #app[touch] {
+
+    track-table {
+
+      [data-col="track_source"] {
+        display: none;
+      }
+    }
+  }
+}

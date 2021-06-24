@@ -46,7 +46,7 @@ export class PlaybackControls extends Lowrider {
    */
   onLoad() {
     // create references to the UI elements
-    this._currentlyPlayingDiv = this.querySelector('.currently-playing')
+    this._currentlyPlayingSelector = '.currently-playing'
     this._scrubberButtonEl = this.querySelector('button.scrubber')
     this._repeatButtonEl = this.querySelector('button.repeat')
     this._shuffleButtonEl = this.querySelector('button.shuffle')
@@ -99,7 +99,7 @@ export class PlaybackControls extends Lowrider {
         if (!Player.trackObj) throw new Error('global Player object is missing trackObj property')
 
         // inject new <track-block> only if we need to
-        if (__(this._currentlyPlayingDiv).find('track-block').attr('trackid') !== Player.currentlyPlayingId) {
+        if (__(this._currentlyPlayingSelector).find('track-block').attr('trackid') !== Player.currentlyPlayingId) {
           this.setCurrentlyPlayingTrackBlock()
         }
 
@@ -116,9 +116,10 @@ export class PlaybackControls extends Lowrider {
 
       case 'stopped':
         __(this).addClass('stopped') // hides stuff that aren't relevant when music isn't playing
+        __(this).removeClass('waveform-error')
         this.syncPlayButton()
         this.removeCurrentlyPlayingTrackBlock()
-        __(this._currentlyPlayingDiv).html('') // erase the track block
+        __(this._currentlyPlayingSelector).html('') // erase the track block
         __(this._currentPlaybackTimeEl).html('0:00') // reset the current playback time
         __(this._trackDurationEl).html('0:00') // reset the song duration
         __(this._progressBarEl).removeAttr('style')
@@ -168,7 +169,8 @@ export class PlaybackControls extends Lowrider {
 
       if (Player.state !== 'playing' && Player.state !== 'paused') return
 
-      let waveformReq = await Bridge.httpApi(`/music-track/${Player.trackObj.id}/waveform`)
+      let samples = window.outerWidth <= 768 ? 500 : 1500
+      let waveformReq = await Bridge.httpApi(`/music-track/${Player.trackObj.id}/waveform?samples=${samples}`)
       
       if (waveformReq.statusRange !== 2) {
         __(this).addClass('waveform-error')
@@ -185,7 +187,7 @@ export class PlaybackControls extends Lowrider {
   setCurrentlyPlayingTrackBlock() {
     //__(this._currentlyPlayingDiv).find('track-block').remove()
 
-    let currentBlock = __(this).find('.currently-playing track-block')
+    let currentBlock = __(this._currentlyPlayingSelector).find('track-block')
 
     // update existing block for smooth fades
     if (currentBlock.els.length) {
@@ -193,7 +195,7 @@ export class PlaybackControls extends Lowrider {
     }
     // insert new block
     else {
-      __(this._currentlyPlayingDiv).html(`<track-block trackid="${Player.currentlyPlayingId}" class="readonly xs"></track-block>`)
+      __(this._currentlyPlayingSelector).html(`<track-block trackid="${Player.currentlyPlayingId}" class="readonly xs"></track-block>`)
     }
   }
 
@@ -201,7 +203,7 @@ export class PlaybackControls extends Lowrider {
    * Updates/overwrites the currently playing track block.
    */
    removeCurrentlyPlayingTrackBlock() {
-    __(this._currentlyPlayingDiv).find('track-block').remove()
+    __(this._currentlyPlayingSelector).find('track-block').remove()
   }
 
   /**
@@ -306,16 +308,15 @@ export class PlaybackControls extends Lowrider {
     })
 
     /**
-     * Scrubber MOUSEDOWN. When the user mousedown's on the scrubber, it will
-     * expand into the audio waveform.
+     * Scrubber MOUSEDOWN and TOUCHSTART. When the user holds the scrubber, it
+     * expands to a waveform.
      *
-     * This registers new event handers that listen for actions while the lmb is
-     * held down. When lmb is released, the event handlers are removed.
+     * This registers new event handers that listen for actions while the
+     * waveform is open. When it is closed, the event handlers are removed.
      */
     let expandWaveform = (event) => {
       event.preventDefault()
-      console.log('a')
-      //if (event.which !== 1) return // must be left click
+
       if (Player.state === 'stopped') return // audio must be playing or paused
 
       let playbackControlsX = __(this).position().x
@@ -326,11 +327,10 @@ export class PlaybackControls extends Lowrider {
        */
       const dragProgressBar = (event) => {
         event.preventDefault()
+
         this.stopTimeUpdating()
-
-        console.log('drag')
-
-        let width = event.x - playbackControlsX
+        let eventX = event.x || event.layerX
+        let width = eventX - playbackControlsX
         this._scrubberButtonEl.classList.add('dragging')
         this._progressBarEl.setAttribute('style', `width:${width}px`)
 
@@ -340,7 +340,7 @@ export class PlaybackControls extends Lowrider {
 
         this.querySelector('.scrubber-time').innerHTML = /*html*/`
           <span class="drag-time" data-seconds="${secondsDragged}">
-            
+            ${__().convertSecondsToHHMMSS(secondsDragged)} / ${__().convertSecondsToHHMMSS(songDuration)}
           </span>`
       }
 
@@ -354,9 +354,16 @@ export class PlaybackControls extends Lowrider {
        */
       const scrubberMouseUpHandler = (event) => {
         event.preventDefault()
-        console.log('up')
-        // lmb was released within the scrubber, seek to that time
-        if (__(event.target).parents('.scrubber').els.length) {
+
+        let releaseWithinWaveform = false
+
+        if (event instanceof MouseEvent) {
+          releaseWithinWaveform = __(event.target).parents('.scrubber').els.length
+        } else if (event instanceof TouchEvent) {
+          releaseWithinWaveform = event.layerY > 0
+        }
+
+        if (releaseWithinWaveform) {
           let dragTime = this._scrubberButtonEl.querySelector('.drag-time')
 
           if (dragTime) {
@@ -364,8 +371,6 @@ export class PlaybackControls extends Lowrider {
             Player.seek(seekToSeconds)
           }
         }
-
-        this.beginTimeUpdating()
 
         __(this._scrubberButtonEl).removeClass('expanded', 'dragging')
 
@@ -388,9 +393,6 @@ export class PlaybackControls extends Lowrider {
     
     this._scrubberButtonEl.addEventListener('mousedown', expandWaveform)
     this._scrubberButtonEl.addEventListener('touchstart', expandWaveform)
-    this._scrubberButtonEl.addEventListener('touchcancel', () => {
-      console.log('cancel')
-    })
   }
 
   /**
@@ -429,6 +431,8 @@ export class PlaybackControls extends Lowrider {
       // truncate the percentage to 4 decimal places
       progressPercentage = progressPercentage.toFixed(4)
 
+      console.log(progressPercentage)
+
       __(this._progressBarEl).css({'width': `${progressPercentage}%`})
     }, 1000 / this._updatesPerSecond)
   }
@@ -449,7 +453,7 @@ export class PlaybackControls extends Lowrider {
    */
   drawWaveform(waveform) {
     const canvasWidth = '100%'
-    const canvasHeight = 60
+    const canvasHeight = window.outerWidth <= 768 ? 50 : 60
     
     //console.log('Drawing waveform', waveform)
 

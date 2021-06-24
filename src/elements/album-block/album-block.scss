@@ -102,9 +102,10 @@ album-block {
 
   .other {
     display: flex;
+    align-items: center;
+    font: 12px var(--base-font);
 
     a, span {
-      font: 12px var(--base-font);
       color: var(--color-faded);
     }
 
@@ -152,4 +153,40 @@ album-block {
       border-radius: calc(var(--border-radius-small) - 1px);
     }
   }
+}
+
+@media screen and (max-width: 768px) {
+  
+  #app[touch] {
+
+    album-block {
+      
+
+      .controls {
+        pointer-events: none;
+      }
+
+      .meta {
+        padding: 5px 0 0 0;
+
+        .other {
+          justify-content: space-between;
+        }
+      }
+
+      .title a {
+        font-size: 11px;
+        line-height: 1em;
+      }
+
+      .artist a span {
+        font-size: 10px;
+      }
+
+      .other span {
+        font-size: 10px;
+      }
+    }
+  }
+
 }

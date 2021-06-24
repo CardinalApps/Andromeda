@@ -304,5 +304,39 @@ track-block[mode="expanded"] {
     &:hover {
       background: var(--base-darker-1);
     }
+
+    > div {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .play-count-col {
+      width: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  track-block[mode="expanded"] {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+
+    .names-col {
+
+      .track-name {
+        font-size: 11px;
+      }
+
+      .small span {
+        font-size: 10px;
+      }
+    }
+
+    .duration-col {
+
+      .duration {
+        font-size: 13px;
+      }
+    }
   }
 }

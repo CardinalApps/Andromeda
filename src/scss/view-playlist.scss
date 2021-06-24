@@ -19,3 +19,17 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+
+  #single-playlist-layout {
+
+    .play-now {
+      justify-content: center;
+    }
+
+    .playlist-meta {
+      margin-bottom: 15px;
+    }
+  }
+}

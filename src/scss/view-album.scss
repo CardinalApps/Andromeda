@@ -79,7 +79,23 @@ h1 {
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
+  #single-album-layout {
+
+    .this-album {
+
+      .art-col {
+        width: 300px;
+      }
+
+      .tracks-col {
+        width: calc(100% - 300px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
 
   #single-album-layout {
 

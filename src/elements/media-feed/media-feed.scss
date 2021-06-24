@@ -387,6 +387,29 @@ media-feed {
 
 }
 
+@media screen and (max-width: 768px) and (min-height: 1024px) {
+
+  // on desktop
+  #app[touch] {
+
+    media-feed {
+
+      .feed-layout-container.big-buttons._4 {
+        width: 600px;
+      }
+
+      .feed-layout-container.half {
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+        padding-right: var(--feed-view-right-padding) !important;
+        padding-left: var(--feed-view-left-padding) !important;
+      }
+    }
+  }
+
+}
+
 @media screen and (max-width: 900px) {
 
   #app[touch] {

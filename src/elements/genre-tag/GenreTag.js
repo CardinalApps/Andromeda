@@ -35,7 +35,7 @@ export class GenreTag extends Lowrider {
       __(this).addClass('is-favorite')
     }
 
-    __(this).addClass('has-context-menu-items')
+    //__(this).addClass('has-context-menu-items')
   }
 
   /**
@@ -76,33 +76,33 @@ export class GenreTag extends Lowrider {
    * 
    * @returns {array}
    */
-  getContextMenuItems() {
-    let genreId = __(this).attr('genreid')
-    let genreName = __(this).attr('genre-name')
+  // getContextMenuItems() {
+  //   let genreId = __(this).attr('genreid')
+  //   let genreName = __(this).attr('genre-name')
 
-    return [{
-      'group': genreName,
-      'items': {
-        /**
-         * Edit Genre
-         */
-        [i18n('genre-tag.context-menu.edit-genre')]: {
-          'cb': (rightClickedEl) => {
-            if (__('#metadata-editor-modal').els.length) {
-              modal.close('metadata-editor-modal')
-            }
+  //   return [{
+  //     'group': genreName,
+  //     'items': {
+  //       /**
+  //        * Edit Genre
+  //        */
+  //       [i18n('genre-tag.context-menu.edit-genre')]: {
+  //         'cb': (rightClickedEl) => {
+  //           if (__('#metadata-editor-modal').els.length) {
+  //             modal.close('metadata-editor-modal')
+  //           }
 
-            modal.show(this.closest('music-app'), `<metadata-editor genreid="${genreId}"></metadata-editor>`, {
-              'id': 'metadata-editor-modal',
-              'mode': 'floating'
-            })
+  //           modal.show(this.closest('music-app'), `<metadata-editor genreid="${genreId}"></metadata-editor>`, {
+  //             'id': 'metadata-editor-modal',
+  //             'mode': 'floating'
+  //           })
 
-            ContextMenu.closeAllContextMenus()
-          }
-        }
-      }
-    }]
-  }
+  //           ContextMenu.closeAllContextMenus()
+  //         }
+  //       }
+  //     }
+  //   }]
+  // }
 
   /**
    * Queries the database for the current favorite genres

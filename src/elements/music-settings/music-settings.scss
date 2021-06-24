@@ -1,5 +1,3 @@
-$settings-sidebar-width: 200px;
-
 music-settings {
   width: 0;
   height: 0;
@@ -62,6 +60,7 @@ form#app-settings-form {
   opacity: 0;
   overflow-y: auto;
   pointer-events: none;
+  --settings-sidebar-width: 200px;
 
   &.open {
     opacity: 1;
@@ -114,7 +113,7 @@ form#app-settings-form {
   .tabs {
     width: 100%;
     max-width: 1100px;
-    padding-left: calc(#{$settings-sidebar-width} + 20px);
+    padding-left: calc(var(--settings-sidebar-width) + 20px);
     margin: 0 auto;
     height: 100%;
     display: flex;
@@ -126,7 +125,7 @@ form#app-settings-form {
   }
 
   header.tabs-row {
-    width: $settings-sidebar-width;
+    width: var(--settings-sidebar-width);
     padding: 45px 10px 0;
     position: absolute;
     top: 0;
@@ -283,6 +282,42 @@ form#app-settings-form {
     .content {
       font: 13px var(--base-font);
       color: var(--color-faded);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .settings-panel {
+    --settings-sidebar-width: 65px;
+
+    header.tabs-row {
+
+      h2 {
+        display: none;
+      }
+
+      h6 {
+        display: none;
+      }
+
+      .flex-tab.active {
+
+        &:after {
+          display: none;
+        }
+
+        i:before {
+          color: var(--accent-color) !important;
+        }
+      }
+    }
+
+    .tabs {
+      padding-left: var(--settings-sidebar-width);
+    }
+
+    .settings-pane {
+      padding: 40px 10px;
     }
   }
 }

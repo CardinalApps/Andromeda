@@ -210,3 +210,13 @@ artist-block[layout="bio"] {
     }
   }
 }
+
+#app[touch] {
+
+  artist-block {
+
+    .controls {
+      pointer-events: none;
+    }
+  }
+}

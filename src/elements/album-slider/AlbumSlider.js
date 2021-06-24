@@ -55,9 +55,9 @@ export class AlbumSlider extends Lowrider {
        * For sliders that are the top block in the media feed
        */
       config = {
-        'slidesPerView': 2,
+        'slidesPerView': 3,
         'slidesPerGroup': 2,
-        'spaceBetween': 20,
+        'spaceBetween': 15,
         'roundLengths': true,
         'touchStartPreventDefault': false,
         'breakpoints': {
@@ -102,7 +102,7 @@ export class AlbumSlider extends Lowrider {
       config = {
         'slidesPerView': 3,
         'slidesPerGroup': 1,
-        'spaceBetween': 20,
+        'spaceBetween': 15,
         'roundLengths': true,
         'touchStartPreventDefault': false,
         'breakpoints': {

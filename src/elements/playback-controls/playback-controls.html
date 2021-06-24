@@ -13,7 +13,16 @@
 <div class="cols">
   <!-- left col, holds the currently playing track -->
   <div class="col left-col">
-    <div class="currently-playing"></div>
+    <button class="queue phone-only">
+      <i class="fas fa-sort-amount-down" tabindex="-1"></i>
+    </button>
+
+    <button class="mute phone-only">
+      <i class="fas fa-volume-up" tabindex="-1"></i>
+      <i class="fas fa-volume-mute" tabindex="-1"></i>
+    </button>
+
+    <div class="currently-playing no-phone"></div>
   </div>
 
   <!-- center col -->
@@ -56,12 +65,12 @@
       <span class="duration">0:00</span>
     </div>
 
-    <button class="mute">
+    <button class="mute no-phone">
       <i class="fas fa-volume-up" tabindex="-1"></i>
       <i class="fas fa-volume-mute" tabindex="-1"></i>
     </button>
     
-    <button class="queue">
+    <button class="queue no-phone">
       <i class="fas fa-sort-amount-down" tabindex="-1"></i>
     </button>
   </div>

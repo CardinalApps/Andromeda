@@ -167,6 +167,10 @@ export class MusicApp extends AppBase {
     __('.nav-pillar-push').on('click', () => {
       __(this).toggleClass('nav-pillar-push')
     })
+    __('#back-button').on('touchmove', (e) => {
+      // stops the back button from scrolling the whole viewport
+      e.preventDefault()
+    })
   }
 
   /**

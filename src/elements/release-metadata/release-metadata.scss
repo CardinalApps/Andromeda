@@ -75,3 +75,20 @@ release-metadata {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+
+  #app[touch] {
+
+    release-metadata {
+
+      .art {
+        width: 70% !important;
+        padding-top: 70%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+}
