@@ -14,3 +14,7 @@ For an overview of the Cardinal tech stack, see [this
 description](https://github.com/somebeaver/Cardinal-Project#tech-stack).
 
 (A detailed description of specifically this UI is coming.)
+
+## License
+
+Uses the GPLv3 software license.
